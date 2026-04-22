@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team - PQC-Huanglab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* —————— 主体内容区域（撑开以让页脚贴底） —————— */
+    .main-content {
+      flex: 1;
+    }
+
+    /* —————— Logo + 标题 —————— */
+    .header-top {
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      min-height: 80px;
+    }
+
+    .logo {
+      height: 60px;
+      width: 60px;
+      margin-right: 16px;
+      background-color: #eee;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-weight: bold;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .site-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .site-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .site-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* —————— 导航栏 —————— */
+    nav {
+      margin: 15px 0 30px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      padding: 12px 0;
+      margin: 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 6px 0;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #007BFF;
+    }
+
+    /* —————— Team 内容区 —————— */
+    .content-section {
+      padding: 20px 0 40px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .team-group {
+      margin-bottom: 40px;
+    }
+
+    .group-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #007BFF;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .member-card {
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    }
+
+    .member-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #ddd;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .member-name {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 4px;
+      color: #222;
+    }
+
+    .member-role {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .member-bio {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* —————— 页脚 —————— */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    /* —————— 响应式 —————— */
+    @media (max-width: 768px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .logo {
+        margin-right: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 0;
+      }
+
+      nav a {
+        width: fit-content;
+      }
+
+      .members-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+      }
+      .site-title {
+        font-size: 20px;
+      }
+      .site-subtitle {
+        font-size: 12px;
+      }
+      .members-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 主体内容（可伸缩） -->
+  <div class="main-content">
+    <div class="container">
+      <!-- Logo + 标题 -->
+      <div class="header-top">
+        <div class="logo">LOGO</div>
+        <div class="site-title-group">
+          <div class="site-title">PQC-Huanglab</div>
+          <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+        </div>
+      </div>
+
+      <!-- 导航栏（Team 高亮） -->
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="publication.html">Publication</a></li>
+          <li><a href="team.html" class="active">Team</a></li>
+          <li><a href="affairs.html">Affairs</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- Team 内容 -->
+      <section class = "content-section">
+        <h1 class="section-title">Our Team</h1>
+
+        <!-- PI -->
+        <div class="team-group">
+          <div class="group-title">Principal Investigator</div>
+          <div class="members-grid">
+            <div class="member-card">
+              <div class="member-avatar">H</div>
+              <div class="member-name">Dr. Qiang Huang</div>
+              <div class="member-role">Professor, Lab Director</div>
+              <div class="member-bio">Focus: Protein quality control, neurodegenerative diseases.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Postdocs -->
+        <div class="team-group">
+          <div class="group-title">Postdoctoral Researchers</div>
+          <div class="members-grid">
+            <div class="member-card">
+              <div class="member-avatar">L</div>
+              <div class="member-name">Dr. Li Zhang</div>
+              <div class="member-role">Postdoc</div>
+              <div class="member-bio">Ubiquitin signaling in stress response.</div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar">W</div>
+              <div class="member-name">Dr. Wei Chen</div>
+              <div class="member-role">Postdoc</div>
+              <div class="member-bio">Autophagy mechanisms in aging.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PhD Students -->
+        <div class="team-group">
+          <div class="group-title">PhD Students</div>
+          <div class="members-grid">
+            <div class="member-card">
+              <div class="member-avatar">M</div>
+              <div class="member-name">Ming Li</div>
+              <div class="member-role">Year 3</div>
+              <div class="member-bio">ER-associated degradation.</div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar">Y</div>
+              <div class="member-name">Yang Zhao</div>
+              <div class="member-role">Year 2</div>
+              <div class="member-bio">Heat shock proteins in cancer.</div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar">T</div>
+              <div class="member-name">Tao Sun</div>
+              <div class="member-role">Year 1</div>
+              <div class="member-bio">Proteostasis in ALS models.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Master's Students -->
+        <div class="team-group">
+          <div class="group-title">Master's Students</div>
+          <div class="members-grid">
+            <div class="member-card">
+              <div class="member-avatar">J</div>
+              <div class="member-name">Jing Liu</div>
+              <div class="member-role">Year 2</div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar">K</div>
+              <div class="member-name">Kai Wang</div>
+              <div class="member-role">Year 1</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Undergraduates -->
+        <div class="team-group">
+          <div class="group-title">Undergraduate Researchers</div>
+          <div class="members-grid">
+            <div class="member-card">
+              <div class="member-avatar">R</div>
+              <div class="member-name">Rui Xu</div>
+              <div class="member-role">Junior</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 页脚（始终在底部） -->
+  <footer>
+    <div class="container">
+      &copy; 2026 PQC-Huanglab. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

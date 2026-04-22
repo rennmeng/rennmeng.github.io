@@ -14,194 +14,535 @@
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
+      background-color: #fff;
+      color: #333;
     }
 
-    /* 头部区域 */
-    header {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* —————— Logo + 标题 —————— */
+    .header-top {
       display: flex;
       align-items: center;
-      padding: 15px 5%;
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 0;
+      min-height: 80px;
     }
 
     .logo {
-      height: 50px;
-      margin-right: 15px;
-      background-color: #eee; /* 占位 logo */
-      border-radius: 4px;
+      height: 60px;
+      width: 60px;
+      margin-right: 16px;
+      background-color: #eee;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #999;
       font-weight: bold;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .site-title-group {
+      display: flex;
+      flex-direction: column;
     }
 
     .site-title {
       font-size: 24px;
       font-weight: bold;
       color: #333;
-      margin-right: 30px;
+      margin-bottom: 4px;
+    }
+
+    .site-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* —————— 导航栏：桌面分散 + 移动堆叠 —————— */
+    nav {
+      margin: 15px 0 30px;
     }
 
     nav ul {
       display: flex;
       list-style: none;
-    }
-
-    nav li {
-      margin: 0 15px;
+      justify-content: space-around;
+      padding: 12px 0;
+      margin: 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
     }
 
     nav a {
       text-decoration: none;
       color: #333;
-      font-weight: 500;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 6px 0;
+      border-radius: 4px;
     }
 
     nav a:hover {
       color: #007BFF;
     }
 
-    /* 轮播图容器 */
+    /* —————— 轮播图 —————— */
     .hero-slider {
-      position: relative;
       width: 100%;
-      height: 40vh;
+      height: 350px; /* 桌面端高度 */
       overflow: hidden;
+      border-radius: 8px;
+      margin: 20px 0;
+      position: relative;
     }
 
-    .hero-slider img {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .slider-wrapper {
+      display: flex;
       width: 100%;
       height: 100%;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .slider-wrapper img {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
       object-fit: cover;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
     }
 
-    .hero-slider img.active {
-      opacity: 1;
+    /* —————— 轮播图切换按钮 —————— */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.3s;
     }
 
-    /* 人物介绍区域 */
+    .slider-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .slider-btn.prev {
+      left: 10px;
+    }
+
+    .slider-btn.next {
+      right: 10px;
+    }
+
+    /* —————— PI 区域 —————— */
     .profile-section {
-      padding: 40px 5%;
-      text-align: center;
+      padding: 40px 0;
     }
 
-    .profile-section h2 {
+    .profile-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      position: relative;
+    }
+
+    .avatar {
+      width: 160px;
+      height: auto;
+      border-radius: 12px;
+      flex-shrink: 0;
+      border: 1px solid #eee;
+      display: block;
+    }
+
+    .profile-text {
+      font-size: 16px;
+      color: #555;
+      flex: 1;
+    }
+
+    .profile-text h2 {
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    .profile-text p {
       margin-bottom: 20px;
     }
 
-    .profile-section p {
-      max-width: 800px;
-      margin: 0 auto;
+    .detail-link {
+      position: absolute;
+      bottom: 0;
+      right: 10px;
+      color: #888;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: normal;
     }
 
-    /* News 展示栏 */
+    .detail-link:hover {
+      color: #007BFF;
+      text-decoration: underline;
+    }
+
+    /* —————— Latest News —————— */
     .news-section {
-      padding: 40px 5%;
+      padding: 40px 0;
       background-color: #f9f9f9;
     }
 
     .news-section h2 {
-      margin-bottom: 20px;
       text-align: center;
+      margin-bottom: 20px;
+      position: relative;
     }
 
-    .news-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+    .news-more {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      font-size: 14px;
+      color: #888;
+      text-decoration: none;
     }
 
-    .news-item {
-      background: #fff;
-      padding: 15px;
-      width: 300px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    .news-more:hover {
+      color: #007BFF;
+      text-decoration: underline;
     }
 
-    /* 页脚 */
+    .news-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .news-col {
+      list-style: none;
+    }
+
+    .news-col li {
+      padding: 8px 0;
+      border-bottom: 1px dashed #ddd;
+      font-size: 14px;
+      color: #555;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.4;
+    }
+
+/* —————— 友情链接：更分散布局 —————— */
+.friend-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 30px; /* 行间距 16px，列间距 30px */
+  padding: 25px 0;
+  border-top: 1px solid #eee;
+  margin-top: 25px;
+  font-size: 14px;
+  justify-content: center;
+  text-align: center;
+}
+
+.friend-title {
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+  margin-right: 20px; /* 标题与链接之间留空 */
+}
+
+.friend-links a {
+  text-decoration: none;
+  color: #555;
+  white-space: nowrap;
+  padding: 4px 8px; /* 微微增加点击区域 */
+}
+
+.friend-links a:hover {
+  color: #007BFF;
+  text-decoration: underline;
+}
+
+    /* —————— 页脚 —————— */
     footer {
       background-color: #333;
       color: #fff;
       text-align: center;
-      padding: 20px;
+      padding: 20px 0;
       font-size: 14px;
+    }
+
+    /* —————— 响应式：移动端调整 —————— */
+    @media (max-width: 768px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .logo {
+        margin-right: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 0;
+      }
+
+      nav a {
+        width: fit-content;
+      }
+
+      .hero-slider {
+        height: 240px;
+      }
+
+      .news-table {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .news-col li {
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .profile-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        position: static;
+      }
+
+      .avatar {
+        width: 100px;
+        height: auto;
+        margin: 0 auto;
+      }
+
+      .profile-text {
+        position: static;
+      }
+
+      .detail-link {
+        position: static;
+        display: inline-block;
+        text-align: center;
+        margin-top: 15px;
+        right: auto;
+        bottom: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+      .hero-slider {
+        height: 200px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+      }
+      .site-title {
+        font-size: 20px;
+      }
+      .site-subtitle {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- 头部 -->
-  <header>
-    <div class="logo">LOGO</div>
-    <div class="site-title">PQC-Huanglab</div>
+  <div class="container">
+    <!-- Logo + 标题 -->
+    <div class="header-top">
+        <img src="./statics/picture/logo.png" alt="logo" class="logo">
+      <div class="site-title-group">
+        <div class="site-title">PQC-Huanglab | Institute of Modern Biology, Nanjing University</div>
+        <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+      </div>
+    </div>
+
+    <!-- 导航栏 -->
     <nav>
       <ul>
         <li><a href="#home">Home</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#publication">Publication</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="./research.html">Research</a></li>
+        <li><a href="./publication.html">Publication</a></li>
+        <li><a href="./team.html">Team</a></li>
+        <li><a href="./affairs.html">Affairs</a></li>
+        <li><a href="./news.html">News</a></li>
+        <li><a href="./contact.html">Contact Us</a></li>
       </ul>
     </nav>
-  </header>
 
-  <!-- 图片轮播区域（使用在线示例图） -->
-  <div class="hero-slider" id="heroSlider">
-    <img src="https://picsum.photos/id/1015/1200/600" class="active" alt="Figure 1">
-    <img src="https://picsum.photos/id/1018/1200/600" alt="Figure 2">
-    <img src="https://picsum.photos/id/1021/1200/600" alt="Figure 3">
-  </div>
-
-  <!-- 人物介绍 -->
-  <section class="profile-section">
-    <h2>Principal Investigator</h2>
-    <p>Dr. Huang is leading the PQC (Post-Quantum Cryptography) Lab with a focus on lattice-based cryptography, cryptographic protocols, and quantum-safe security solutions.</p>
-  </section>
-
-  <!-- News 展示 -->
-  <section class="news-section">
-    <h2>Latest News</h2>
-    <div class="news-list">
-      <div class="news-item">
-        <h3>New Paper Accepted</h3>
-        <p>Our paper on "Efficient Lattice Signatures" has been accepted to CRYPTO 2026.</p>
+    <!-- 轮播图 -->
+    <div class="hero-slider">
+      <div class="slider-wrapper" id="sliderWrapper">
+        <img src="./statics/picture/figure23.jpg" alt="Slide 1">
+        <img src="./statics/picture/figure24.jpg" alt="Slide 2">
+        <img src="./statics/picture/figure24.jpg" alt="Slide 3">
+        <img src="./statics/picture/figure22.jpg" alt="Slide 4">
+        <img src="./statics/picture/figure24.jpg" alt="Slide 5">
       </div>
-      <div class="news-item">
-        <h3>Lab Welcomes New PhD Student</h3>
-        <p>We are excited to welcome Alice Zhang to the team!</p>
-      </div>
+      <button class="slider-btn prev" aria-label="Previous slide">‹</button>
+      <button class="slider-btn next" aria-label="Next slide">›</button>
     </div>
-  </section>
+
+    <!-- PI -->
+    <section class="profile-section">
+      <div class="profile-content">
+        <img src="./statics/picture/lqh.jpg" alt="Dr. Huang" class="avatar">
+        <div class="profile-text">
+          <h2>Principal Investigator</h2>
+          <p>Dr. Huang is leading the PQC (Protein Quality Control) Lab, with a research focus on the role and molecular mechanisms of the protein quality control system in cellular homeostasis. The protein quality control system is an essential cellular machinery that assists in the proper folding of proteins and maintains their correct three-dimensional conformation to ensure biological activity. Dysfunction of this system often leads to protein misfolding, which is closely associated with a range of human diseases, including Alzheimer’s disease and other neurodegenerative disorders, diabetes, and cancer.</p>
+          <a href="https://imb.nju.edu.cn/rcdw/zzpxl/20220402/i220299.html" class="detail-link">Detail</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest News -->
+    <section class="news-section">
+      <h2>
+        Latest News
+        <a href="/news" class="news-more">More</a>
+      </h2>
+      <div class="news-table">
+        <ul class="news-col">
+          <li>2026-04-20 新论文发表于 Nature Cell Biology</li>
+          <li>2026-04-15 实验室获国家自然科学基金重点项目</li>
+          <li>2026-04-10 博士生李明获优秀研究生奖</li>
+          <li>2026-04-05 参加国际蛋白稳态大会</li>
+          <li>2026-04-01 新设备冷冻电镜安装完成</li>
+        </ul>
+        <ul class="news-col">
+          <li>Apr 20, 2026 New paper published in Nature Cell Biology</li>
+          <li>Apr 15, 2026 Lab awarded NSFC Key Project</li>
+          <li>Apr 10, 2026 PhD student Li Ming wins Outstanding Graduate Award</li>
+          <li>Apr 5, 2026 Attended International Proteostasis Conference</li>
+          <li>Apr 1, 2026 Cryo-EM installed successfully in the lab</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 友情链接 -->
+    <div class="friend-links">
+      <span class="friend-title">Collaborators:</span>
+      <a href="https://www.nju.edu.cn/" target="_blank">Nanjing University</a>
+      <a href="https://imb.nju.edu.cn/index.html" target="_blank">Institute of Modern Biology</a>
+      <a href="https://imb.nju.edu.cn/rcdw/zzpxl/20220402/i220299.html" target="_blank">PI introduction</a>
+      <a href="https://www.sertool.net" target="_blank">SERtool</a>
+    </div>
+  </div>
 
   <!-- 页脚 -->
   <footer>
-    &copy; 2026 PQC-Huanglab. All rights reserved.
+    <div class="container">
+      &copy; 2026 PQC-Huanglab. All rights reserved.
+    </div>
   </footer>
 
-  <!-- 轮播控制脚本 -->
+  <!-- 轮播脚本 -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const slider = document.getElementById('heroSlider');
-      const images = slider.querySelectorAll('img');
-      let currentIndex = 0;
+      const wrapper = document.getElementById('sliderWrapper');
+      const prevBtn = document.querySelector('.slider-btn.prev');
+      const nextBtn = document.querySelector('.slider-btn.next');
+      const totalReal = 3; // 实际图片数量（不包括首尾克隆）
+      let currentIndex = 1;
+      let intervalId;
 
-      function showNext() {
-        images[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % images.length;
-        images[currentIndex].classList.add('active');
+      // 初始化位置（显示第1张真实图）
+      wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      function goToSlide(index) {
+        currentIndex = index;
+        wrapper.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
       }
 
-      setInterval(showNext, 4000);
+      function nextSlide() {
+        if (currentIndex >= totalReal + 1) {
+          // 无缝跳回第一张
+          wrapper.style.transition = 'none';
+          currentIndex = 1;
+          wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+          setTimeout(() => {
+            wrapper.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          }, 50);
+        } else {
+          goToSlide(currentIndex + 1);
+        }
+      }
+
+      function prevSlide() {
+        if (currentIndex <= 1) {
+          // 无缝跳到最后
+          wrapper.style.transition = 'none';
+          currentIndex = totalReal + 1;
+          wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+          setTimeout(() => {
+            wrapper.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          }, 50);
+        } else {
+          goToSlide(currentIndex - 1);
+        }
+      }
+
+      function startAutoPlay() {
+        intervalId = setInterval(nextSlide, 6000);
+      }
+
+      function stopAutoPlay() {
+        clearInterval(intervalId);
+      }
+
+      // 绑定按钮事件
+      nextBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        nextSlide();
+        setTimeout(startAutoPlay, 6000); // 切换后重置计时器
+      });
+
+      prevBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        prevSlide();
+        setTimeout(startAutoPlay, 6000);
+      });
+
+      // 悬停暂停
+      const sliderContainer = document.querySelector('.hero-slider');
+      sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+      sliderContainer.addEventListener('mouseleave', startAutoPlay);
+
+      // 启动自动轮播
+      startAutoPlay();
     });
   </script>
 </body>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Publications - PQC-Huanglab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* —————— 主体内容区域（撑开以让页脚贴底） —————— */
+    .main-content {
+      flex: 1;
+    }
+
+    /* —————— Logo + 标题 —————— */
+    .header-top {
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      min-height: 80px;
+    }
+
+    .logo {
+      height: 60px;
+      width: 60px;
+      margin-right: 16px;
+      background-color: #eee;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-weight: bold;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .site-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .site-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .site-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* —————— 导航栏 —————— */
+    nav {
+      margin: 15px 0 30px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      padding: 12px 0;
+      margin: 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 6px 0;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #007BFF;
+    }
+
+    /* —————— Publications 列表式 —————— */
+    .content-section {
+      padding: 20px 0 40px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .pubs-list {
+      list-style: none;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .pub-item {
+      padding: 16px 0;
+      border-bottom: 1px dashed #ddd;
+    }
+
+    .pub-item:last-child {
+      border-bottom: none;
+    }
+
+    .pub-title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #222;
+    }
+
+    .pub-authors {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .pub-journal {
+      font-size: 14px;
+      color: #007BFF;
+      font-style: italic;
+    }
+
+    .pub-links {
+      margin-top: 6px;
+      font-size: 13px;
+    }
+
+    .pub-links a {
+      color: #007BFF;
+      text-decoration: none;
+      margin-right: 12px;
+    }
+
+    .pub-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* —————— 页脚 —————— */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      margin-top: auto; /* 确保在底部 */
+    }
+
+    /* —————— 响应式 —————— */
+    @media (max-width: 768px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .logo {
+        margin-right: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 0;
+      }
+
+      nav a {
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+      }
+      .site-title {
+        font-size: 20px;
+      }
+      .site-subtitle {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 主体内容（可伸缩） -->
+  <div class="main-content">
+    <div class="container">
+      <!-- Logo + 标题 -->
+      <div class="header-top">
+        <div class="logo">LOGO</div>
+        <div class="site-title-group">
+          <div class="site-title">PQC-Huanglab</div>
+          <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+        </div>
+      </div>
+
+      <!-- 导航栏 -->
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="publication.html" class="active">Publication</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="affairs.html">Affairs</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- Publications 列表 -->
+      <section class="content-section">
+        <h1 class="section-title">Selected Publications</h1>
+        <ul class="pubs-list">
+          <li class="pub-item">
+            <div class="pub-title">ER-associated degradation safeguards proteostasis during aging</div>
+            <div class="pub-authors">Zhang Y, Liu X, Huang Lab*</div>
+            <div class="pub-journal">Nature Cell Biology, 2026</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">PDF</a>
+              <a href="#" target="_blank">DOI</a>
+              <a href="#" target="_blank">Supp</a>
+            </div>
+          </li>
+          <li class="pub-item">
+            <div class="pub-title">A novel E3 ligase regulates tau clearance in Alzheimer’s models</div>
+            <div class="pub-authors">Wang L, Chen R, Huang Lab*</div>
+            <div class="pub-journal">Neuron, 2026</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">PDF</a>
+              <a href="#" target="_blank">DOI</a>
+            </div>
+          </li>
+          <li class="pub-item">
+            <div class="pub-title">Heat shock factor 1 coordinates proteostasis and metabolism</div>
+            <div class="pub-authors">Li M, Zhao K, Huang Lab*</div>
+            <div class="pub-journal">Cell Metabolism, 2025</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">PDF</a>
+              <a href="#" target="_blank">DOI</a>
+            </div>
+          </li>
+          <li class="pub-item">
+            <div class="pub-title">Selective autophagy of misfolded SOD1 in ALS</div>
+            <div class="pub-authors">Huang Q, Sun T, Huang Lab*</div>
+            <div class="pub-journal">Journal of Clinical Investigation, 2025</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">PDF</a>
+              <a href="#" target="_blank">DOI</a>
+            </div>
+          </li>
+          <li class="pub-item">
+            <div class="pub-title">Deubiquitinase USP19 stabilizes HSP70 under stress</div>
+            <div class="pub-authors">Yang J, Huang Lab*</div>
+            <div class="pub-journal">Molecular Cell, 2024</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">PDF</a>
+              <a href="#" target="_blank">DOI</a>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- 页脚（始终在底部） -->
+  <footer>
+    <div class="container">
+      &copy; 2026 PQC-Huanglab. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

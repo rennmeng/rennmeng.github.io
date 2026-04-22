@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News - PQC-Huanglab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .main-content {
+      flex: 1;
+    }
+
+    /* —————— Logo + 标题 —————— */
+    .header-top {
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      min-height: 80px;
+    }
+
+    .logo {
+      height: 60px;
+      width: 60px;
+      margin-right: 16px;
+      background-color: #eee;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-weight: bold;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .site-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .site-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .site-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* —————— 导航栏 —————— */
+    nav {
+      margin: 15px 0 30px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      padding: 12px 0;
+      margin: 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 6px 0;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #007BFF;
+    }
+
+    /* —————— News 内容区 —————— */
+    .content-section {
+      padding: 20px 0 40px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .news-list {
+      max-width: 800px;
+      margin: 0 auto;
+      list-style: none;
+    }
+
+    .news-item {
+      padding: 20px 0;
+      border-bottom: 1px dashed #ddd;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-date {
+      font-size: 13px;
+      color: #007BFF;
+      margin-bottom: 6px;
+    }
+
+    .news-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #222;
+    }
+
+    .news-content {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* —————— 页脚 —————— */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    /* —————— 响应式 —————— */
+    @media (max-width: 768px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .logo {
+        margin-right: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 0;
+      }
+
+      nav a {
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+      }
+      .site-title {
+        font-size: 20px;
+      }
+      .site-subtitle {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-content">
+    <div class="container">
+      <!-- Logo + 标题 -->
+      <div class="header-top">
+        <div class="logo">LOGO</div>
+        <div class="site-title-group">
+          <div class="site-title">PQC-Huanglab</div>
+          <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+        </div>
+      </div>
+
+      <!-- 导航栏（News 高亮） -->
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="publication.html">Publication</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="#affairs">Affairs</a></li>
+          <li><a href="news.html" class="active">News</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- News 内容 -->
+      <section class="content-section">
+        <h1 class="section-title">Lab News</h1>
+        <ul class="news-list">
+          <li class="news-item">
+            <div class="news-date">2026-04-15</div>
+            <div class="news-title">Dr. Huang gives keynote at International Proteostasis Conference</div>
+            <div class="news-content">Our PI presented the latest findings on ERAD regulation in neurodegeneration to an audience of over 500 researchers.</div>
+          </li>
+          <li class="news-item">
+            <div class="news-date">2026-03-22</div>
+            <div class="news-title">Two new PhD students join the lab</div>
+            <div class="news-content">Welcome Tao Sun and Yang Zhao! They will work on autophagy and heat shock response, respectively.</div>
+          </li>
+          <li class="news-item">
+            <div class="news-date">2026-02-10</div>
+            <div class="news-title">Paper accepted in Nature Cell Biology</div>
+            <div class="news-content">Our study on aging-related decline in protein quality control has been accepted for publication.</div>
+          </li>
+          <li class="news-item">
+            <div class="news-date">2025-12-05</div>
+            <div class="news-title">Lab retreat held in Hangzhou</div>
+            <div class="news-content">The team gathered for two days of science, strategy, and hiking around West Lake.</div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      &copy; 2026 PQC-Huanglab. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

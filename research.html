@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research - PQC-Huanglab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* —————— Logo + 标题 —————— */
+    .header-top {
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      min-height: 80px;
+    }
+
+    .logo {
+      height: 60px;
+      width: 60px;
+      margin-right: 16px;
+      background-color: #eee;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-weight: bold;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .site-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .site-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .site-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* —————— 导航栏：桌面分散 + 移动堆叠 —————— */
+    nav {
+      margin: 15px 0 40px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      padding: 12px 0;
+      margin: 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 6px 0;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #007BFF;
+    }
+
+    /* —————— 研究内容区 —————— */
+    .content-section {
+      padding: 20px 0 60px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .research-card {
+      background: #fafafa;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    .research-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      background: #eef5ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: #007BFF;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #222;
+    }
+
+    .card-text {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* —————— 页脚 —————— */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+
+    /* —————— 响应式 —————— */
+    @media (max-width: 768px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .logo {
+        margin-right: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 0;
+      }
+
+      nav a {
+        width: fit-content;
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+      }
+      .site-title {
+        font-size: 20px;
+      }
+      .site-subtitle {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Logo + 标题 -->
+    <div class="header-top">
+        <img src="./statics/picture/logo.png" alt="logo" class="logo">
+      <div class="site-title-group">
+        <div class="site-title">PQC-Huanglab | Institute of Modern Biology, Nanjing University</div>
+        <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+      </div>
+    </div>
+
+    <!-- 导航栏（Research 高亮） -->
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html" class="active">Research</a></li>
+        <li><a href="publication.html">Publication</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="affairs.html">Affairs</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- 研究内容 -->
+    <section class="content-section">
+      <h1 class="section-title">Our Research</h1>
+      <div class="research-grid">
+        <div class="research-card">
+          <div class="card-icon">🧬</div>
+          <h2 class="card-title">Protein Folding & Misfolding</h2>
+          <p class="card-text">We investigate the molecular mechanisms of protein folding in the endoplasmic reticulum and how misfolding leads to neurodegenerative diseases such as Alzheimer's and Parkinson's.</p>
+        </div>
+        <div class="research-card">
+          <div class="card-icon">🔬</div>
+          <h2 class="card-title">Ubiquitin-Proteasome System</h2>
+          <p class="card-text">Our lab studies the regulation of the ubiquitin-proteasome pathway, focusing on E3 ligases and deubiquitinases that control protein degradation under stress conditions.</p>
+        </div>
+        <div class="research-card">
+          <div class="card-icon">🌡️</div>
+          <h2 class="card-title">Heat Shock Response</h2>
+          <p class="card-text">We explore how cells activate heat shock proteins (HSPs) to maintain proteostasis during thermal or oxidative stress, and how this pathway is dysregulated in cancer.</p>
+        </div>
+        <div class="research-card">
+          <div class="card-icon">🧫</div>
+          <h2 class="card-title">Autophagy & Lysosomal Degradation</h2>
+          <p class="card-text">We aim to understand selective autophagy pathways that clear aggregated proteins and damaged organelles, with implications for aging and metabolic disorders.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      &copy; 2026 PQC-Huanglab. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

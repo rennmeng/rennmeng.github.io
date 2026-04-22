@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - PQC-Huanglab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .main-content {
+      flex: 1;
+    }
+
+    /* —————— Logo + 标题 —————— */
+    .header-top {
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      min-height: 80px;
+    }
+
+    .logo {
+      height: 60px;
+      width: 60px;
+      margin-right: 16px;
+      background-color: #eee;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-weight: bold;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .site-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .site-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .site-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* —————— 导航栏 —————— */
+    nav {
+      margin: 15px 0 30px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      padding: 12px 0;
+      margin: 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 6px 0;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #007BFF;
+    }
+
+    /* —————— Contact 内容区 —————— */
+    .content-section {
+      padding: 20px 0 40px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .contact-info {
+      max-width: 700px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .info-card {
+      background: #fafafa;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .info-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #007BFF;
+      margin-bottom: 16px;
+    }
+
+    .info-item {
+      margin-bottom: 12px;
+      display: flex;
+    }
+
+    .info-label {
+      font-weight: bold;
+      min-width: 80px;
+      color: #333;
+    }
+
+    .info-value {
+      color: #555;
+      flex: 1;
+    }
+
+    .info-value a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .info-value a:hover {
+      text-decoration: underline;
+    }
+
+    /* 地图占位（可替换为 iframe） */
+    .map-placeholder {
+      background: #f5f5f5;
+      height: 200px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* —————— 页脚 —————— */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    /* —————— 响应式 —————— */
+    @media (max-width: 768px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .logo {
+        margin-right: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 0;
+      }
+
+      nav a {
+        width: fit-content;
+      }
+
+      .contact-info {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+      }
+      .site-title {
+        font-size: 20px;
+      }
+      .site-subtitle {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-content">
+    <div class="container">
+      <!-- Logo + 标题 -->
+      <div class="header-top">
+        <div class="logo">LOGO</div>
+        <div class="site-title-group">
+          <div class="site-title">PQC-Huanglab</div>
+          <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+        </div>
+      </div>
+
+      <!-- 导航栏（Contact Us 高亮） -->
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="publication.html">Publication</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="#affairs">Affairs</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contact.html" class="active">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contact 内容 -->
+      <section class="content-section">
+        <h1 class="section-title">Contact Us</h1>
+        <div class="contact-info">
+          <div class="info-card">
+            <div class="info-title">Lab Address</div>
+            <div class="info-item">
+              <div class="info-label">Building:</div>
+              <div class="info-value">Institute of Modern Biology, Nanjing University, Room 410</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Institution:</div>
+              <div class="info-value">Institute of Modern Biology, Nanjing University</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">City:</div>
+              <div class="info-value">Nanjing, Jiangsu 210023</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Country:</div>
+              <div class="info-value">China</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-title">Contact Info</div>
+            <div class="info-item">
+              <div class="info-label">PI Email:</div>
+              <div class="info-value"><a href="lqhuang@nju.edu.cn">lqhuang@nju.edu.cn</a></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Website:</div>
+              <div class="info-value"><a href="https://www.pqc-huanglab.com" target="_blank">https://www.pqc-huanglab.com</a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      &copy; 2026 PQC-Huanglab. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
