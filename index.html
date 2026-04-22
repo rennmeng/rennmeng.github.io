@@ -28,6 +28,13 @@
     .logo {
       height: 50px;
       margin-right: 15px;
+      background-color: #eee; /* 占位 logo */
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-weight: bold;
     }
 
     .site-title {
@@ -56,13 +63,27 @@
       color: #007BFF;
     }
 
-    /* 横向图片区域 */
-    .hero-image {
+    /* 轮播图容器 */
+    .hero-slider {
+      position: relative;
       width: 100%;
-      height: 40vh; /* 占屏幕纵向40% */
-      background-image: url('your-hero-image.jpg'); /* 替换为你的图片路径 */
-      background-size: cover;
-      background-position: center;
+      height: 40vh;
+      overflow: hidden;
+    }
+
+    .hero-slider img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .hero-slider img.active {
+      opacity: 1;
     }
 
     /* 人物介绍区域 */
@@ -120,7 +141,7 @@
 
   <!-- 头部 -->
   <header>
-    <img src="logo.png" alt="Logo" class="logo" />
+    <div class="logo">LOGO</div>
     <div class="site-title">PQC-Huanglab</div>
     <nav>
       <ul>
@@ -134,8 +155,12 @@
     </nav>
   </header>
 
-  <!-- 横向图片 -->
-  <div class="hero-image"></div>
+  <!-- 图片轮播区域（使用在线示例图） -->
+  <div class="hero-slider" id="heroSlider">
+    <img src="https://picsum.photos/id/1015/1200/600" class="active" alt="Figure 1">
+    <img src="https://picsum.photos/id/1018/1200/600" alt="Figure 2">
+    <img src="https://picsum.photos/id/1021/1200/600" alt="Figure 3">
+  </div>
 
   <!-- 人物介绍 -->
   <section class="profile-section">
@@ -155,7 +180,6 @@
         <h3>Lab Welcomes New PhD Student</h3>
         <p>We are excited to welcome Alice Zhang to the team!</p>
       </div>
-      <!-- 可继续添加更多 news -->
     </div>
   </section>
 
@@ -164,5 +188,21 @@
     &copy; 2026 PQC-Huanglab. All rights reserved.
   </footer>
 
+  <!-- 轮播控制脚本 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slider = document.getElementById('heroSlider');
+      const images = slider.querySelectorAll('img');
+      let currentIndex = 0;
+
+      function showNext() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+      }
+
+      setInterval(showNext, 4000);
+    });
+  </script>
 </body>
 </html>
