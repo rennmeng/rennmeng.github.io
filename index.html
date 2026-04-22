@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PQC-Huanglab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* 头部区域 */
+    header {
+      display: flex;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      height: 50px;
+      margin-right: 15px;
+    }
+
+    .site-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-right: 30px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav li {
+      margin: 0 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #007BFF;
+    }
+
+    /* 横向图片区域 */
+    .hero-image {
+      width: 100%;
+      height: 40vh; /* 占屏幕纵向40% */
+      background-image: url('your-hero-image.jpg'); /* 替换为你的图片路径 */
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* 人物介绍区域 */
+    .profile-section {
+      padding: 40px 5%;
+      text-align: center;
+    }
+
+    .profile-section h2 {
+      margin-bottom: 20px;
+    }
+
+    .profile-section p {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* News 展示栏 */
+    .news-section {
+      padding: 40px 5%;
+      background-color: #f9f9f9;
+    }
+
+    .news-section h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .news-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .news-item {
+      background: #fff;
+      padding: 15px;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* 页脚 */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 头部 -->
+  <header>
+    <img src="logo.png" alt="Logo" class="logo" />
+    <div class="site-title">PQC-Huanglab</div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publication">Publication</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 横向图片 -->
+  <div class="hero-image"></div>
+
+  <!-- 人物介绍 -->
+  <section class="profile-section">
+    <h2>Principal Investigator</h2>
+    <p>Dr. Huang is leading the PQC (Post-Quantum Cryptography) Lab with a focus on lattice-based cryptography, cryptographic protocols, and quantum-safe security solutions.</p>
+  </section>
+
+  <!-- News 展示 -->
+  <section class="news-section">
+    <h2>Latest News</h2>
+    <div class="news-list">
+      <div class="news-item">
+        <h3>New Paper Accepted</h3>
+        <p>Our paper on "Efficient Lattice Signatures" has been accepted to CRYPTO 2026.</p>
+      </div>
+      <div class="news-item">
+        <h3>Lab Welcomes New PhD Student</h3>
+        <p>We are excited to welcome Alice Zhang to the team!</p>
+      </div>
+      <!-- 可继续添加更多 news -->
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    &copy; 2026 PQC-Huanglab. All rights reserved.
+  </footer>
+
+</body>
+</html>
