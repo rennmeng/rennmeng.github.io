@@ -11,7 +11,6 @@
       box-sizing: border-box;
     }
 
-    /* ✅ 新增：让 body 成为 flex 容器，最小高度为视口高度 */
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
@@ -19,7 +18,7 @@
       color: #333;
       display: flex;
       flex-direction: column;
-      min-height: 100vh; /* 关键：至少占满视口 */
+      min-height: 100vh;
     }
 
     .container {
@@ -71,7 +70,24 @@
 
     /* —————— Main Content Wrapper —————— */
     .main-content {
-      flex: 1; /* ✅ 关键：撑开剩余空间 */
+      flex: 1;
+    }
+
+    /* —————— Hamburger Button —————— */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 100%;
+      background-color: #333;
+      transition: 0.3s;
     }
 
     /* —————— Navigation —————— */
@@ -116,7 +132,7 @@
     }
 
     .contact-info {
-      max-width: 960px; /* = 1200 - 2*20 - 但实际受外层 container 控制 */
+      max-width: 960px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -171,29 +187,53 @@
       text-align: center;
       padding: 20px 0;
       font-size: 14px;
-      margin-top: auto; /* 辅助贴底（可选） */
     }
 
     /* —————— Responsive —————— */
     @media (max-width: 768px) {
       .header-top {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-      }
-      .logo {
-        margin-right: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
       }
 
-      nav ul {
+      .logo {
+        margin-right: 12px;
+      }
+
+      .site-title-group {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+      }
+
+      /* 显示汉堡按钮 */
+      .hamburger {
+        display: flex;
+      }
+
+      /* 隐藏默认导航 */
+      nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
         gap: 10px;
         padding: 12px 0;
+        margin-top: 10px;
+        border: none;
+        background: #f9f9f9;
+        border-radius: 8px;
+        width: 100%;
+      }
+
+      /* JS 控制显示 */
+      nav ul.show {
+        display: flex;
       }
 
       nav a {
-        width: fit-content;
+        width: 100%;
+        padding: 8px 0;
+        text-align: left;
       }
 
       .contact-info {
@@ -211,7 +251,7 @@
         font-size: 18px;
       }
       .site-title {
-        font-size: 20px;
+        font-size: 16px;
       }
       .site-subtitle {
         font-size: 12px;
@@ -221,11 +261,8 @@
 </head>
 <body>
 
-  <!-- ✅ 主内容区：用 .main-content 包裹，实现 flex:1 -->
   <div class="main-content">
-    <!-- 外层 container -->
     <div class="container">
-      <!-- 内层 container（匹配 Publications 的冗余结构） -->
       <div class="container">
         <div class="header-top">
           <div style="display: flex; align-items: center;">
@@ -243,7 +280,6 @@
         </div>
       </div>
 
-      <!-- Navigation -->
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -256,7 +292,6 @@
         </ul>
       </nav>
 
-      <!-- Contact Content -->
       <section class="content-section">
         <h1 class="section-title">Contact Us</h1>
         <div class="contact-info">
@@ -316,12 +351,23 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       &copy; 2026 PQC-Huanglab. All rights reserved.
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.querySelector('nav ul');
+
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+          navMenu.classList.toggle('show');
+        });
+      }
+    });
+  </script>
 </body>
 </html>
