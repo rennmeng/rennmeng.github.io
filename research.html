@@ -30,6 +30,7 @@
       align-items: center;
       padding: 20px 0;
       min-height: 80px;
+      justify-content: space-between;
     }
 
     .logo {
@@ -53,7 +54,7 @@
     }
 
     .site-title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
       color: #333;
       margin-bottom: 4px;
@@ -64,9 +65,21 @@
       color: #666;
     }
 
-    /* —————— 导航栏：桌面分散 + 移动堆叠 —————— */
+    /* —————— 主体内容区域 —————— */
+    .content-section {
+      padding: 20px 0 40px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* —————— 导航栏 —————— */
     nav {
-      margin: 15px 0 40px;
+      margin: 15px 0 30px;
     }
 
     nav ul {
@@ -93,61 +106,41 @@
       color: #007BFF;
     }
 
-    /* —————— 研究内容区 —————— */
-    .content-section {
-      padding: 20px 0 60px;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 40px;
-      color: #333;
-    }
-
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .research-card {
-      background: #fafafa;
-      border-radius: 10px;
-      padding: 25px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      transition: transform 0.2s;
-    }
-
-    .research-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .card-icon {
-      width: 50px;
-      height: 50px;
-      background: #eef5ff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      color: #007BFF;
-      font-weight: bold;
-      font-size: 20px;
+    /* —————— Research 卡片样式 —————— */
+    .research-detail-card {
+      background: #fff;
+      width: 100%;
+      max-width: 960px;  
+      margin: 0 auto;
     }
 
     .card-title {
-      font-size: 18px;
+      font-size: 26px;
       font-weight: bold;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
       color: #222;
     }
 
     .card-text {
-      font-size: 15px;
-      color: #555;
-      line-height: 1.6;
+      font-size: 16px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .card-text h3 {
+      font-size: 20px;
+      margin: 24px 0 12px;
+      color: #007BFF;
+    }
+
+    .card-text ul {
+      padding-left: 20px;
+      margin: 12px 0;
+    }
+
+    .card-text li {
+      margin-bottom: 8px;
     }
 
     /* —————— 页脚 —————— */
@@ -157,6 +150,7 @@
       text-align: center;
       padding: 20px 0;
       font-size: 14px;
+      margin-top: auto;
     }
 
     /* —————— 响应式 —————— */
@@ -181,8 +175,16 @@
         width: fit-content;
       }
 
-      .research-grid {
-        grid-template-columns: 1fr;
+      .research-detail-card {
+        padding: 25px 20px;
+      }
+
+      .card-title {
+        font-size: 22px;
+      }
+
+      .card-text {
+        font-size: 15px;
       }
     }
 
@@ -206,17 +208,27 @@
 </head>
 <body>
 
+  <!-- 外层 container -->
   <div class="container">
-    <!-- Logo + 标题 -->
-    <div class="header-top">
-        <img src="./statics/picture/logo.png" alt="logo" class="logo">
-      <div class="site-title-group">
-        <div class="site-title">PQC-Huanglab | Institute of Modern Biology, Nanjing University</div>
-        <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+    <!-- 内层 container（与 Publications 保持一致，即使冗余） -->
+    <div class="container">
+      <div class="header-top">
+        <div style="display: flex; align-items: center;">
+          <img src="./statics/picture/logo.png" alt="logo" class="logo">
+          <div class="site-title-group">
+            <div class="site-title">PQC-Huanglab | IMB, Nanjing University</div>
+            <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+          </div>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
 
-    <!-- 导航栏（Research 高亮） -->
+    <!-- 导航栏（与 Publications 完全一致） -->
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -229,35 +241,52 @@
       </ul>
     </nav>
 
-    <!-- 研究内容 -->
+    <!-- Research 内容区 -->
     <section class="content-section">
-      <h1 class="section-title">Our Research</h1>
-      <div class="research-grid">
-        <div class="research-card">
-          <div class="card-icon">🧬</div>
-          <h2 class="card-title">Protein Folding & Misfolding</h2>
-          <p class="card-text">We investigate the molecular mechanisms of protein folding in the endoplasmic reticulum and how misfolding leads to neurodegenerative diseases such as Alzheimer's and Parkinson's.</p>
-        </div>
-        <div class="research-card">
-          <div class="card-icon">🔬</div>
-          <h2 class="card-title">Ubiquitin-Proteasome System</h2>
-          <p class="card-text">Our lab studies the regulation of the ubiquitin-proteasome pathway, focusing on E3 ligases and deubiquitinases that control protein degradation under stress conditions.</p>
-        </div>
-        <div class="research-card">
-          <div class="card-icon">🌡️</div>
-          <h2 class="card-title">Heat Shock Response</h2>
-          <p class="card-text">We explore how cells activate heat shock proteins (HSPs) to maintain proteostasis during thermal or oxidative stress, and how this pathway is dysregulated in cancer.</p>
-        </div>
-        <div class="research-card">
-          <div class="card-icon">🧫</div>
-          <h2 class="card-title">Autophagy & Lysosomal Degradation</h2>
-          <p class="card-text">We aim to understand selective autophagy pathways that clear aggregated proteins and damaged organelles, with implications for aging and metabolic disorders.</p>
-        </div>
+      <h1 class="section-title">Research Focus</h1>
+      <div class="research-detail-card">
+        <h2 class="card-title">Protein Folding & Misfolding in Neurodegenerative Diseases</h2>
+
+        <p class="card-text">
+          Proper protein folding is essential for cellular function. In the endoplasmic reticulum (ER), molecular chaperones and folding enzymes assist nascent polypeptides to achieve their native conformations. However, genetic mutations, environmental stress, or aging can disrupt this delicate process, leading to the accumulation of misfolded proteins—a hallmark of many neurodegenerative disorders.
+        </p>
+
+        <h3>Our Research Goals</h3>
+        <p class="card-text">
+          We aim to elucidate the structural and mechanistic basis of protein misfolding and its clearance pathways, with a focus on:
+        </p>
+        <ul class="card-text">
+          <li>How disease-associated mutations impair folding kinetics and stability</li>
+          <li>The role of ER-resident chaperones (e.g., BiP, calnexin) in triaging clients</li>
+          <li>Cross-talk between ER quality control and cytosolic degradation systems</li>
+        </ul>
+
+        <h3>Key Methodologies</h3>
+        <p class="card-text">
+          Our lab integrates multidisciplinary approaches:
+        </p>
+        <ul class="card-text">
+          <li><strong>Structural Biology:</strong> Cryo-EM and X-ray crystallography of chaperone-client complexes</li>
+          <li><strong>Biochemistry:</strong> In vitro reconstitution of folding/degradation assays</li>
+          <li><strong>Cell Biology:</strong> Live-cell imaging, CRISPR-Cas9 gene editing, and proteostasis reporters</li>
+          <li><strong>Disease Models:</strong> Patient-derived iPSCs and transgenic mouse models</li>
+        </ul>
+
+        <h3>Current Projects</h3>
+        <ul class="card-text">
+          <li>Structural dynamics of mutant SOD1 in ALS pathogenesis</li>
+          <li>Mechanism of tau aggregation suppression by Hsp70 co-chaperones</li>
+          <li>Development of small-molecule correctors for α-synuclein misfolding in Parkinson’s disease</li>
+        </ul>
+
+        <p class="card-text">
+          By bridging molecular mechanism with pathological relevance, we strive to identify novel therapeutic strategies that restore proteostasis in neurodegenerative conditions.
+        </p>
       </div>
     </section>
   </div>
 
-  <!-- 页脚 -->
+  <!-- 页脚（与 Publications 一致） -->
   <footer>
     <div class="container">
       &copy; 2026 PQC-Huanglab. All rights reserved.

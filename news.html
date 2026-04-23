@@ -11,17 +11,11 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-    }
-
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
       background-color: #fff;
       color: #333;
-      display: flex;
-      flex-direction: column;
     }
 
     .container {
@@ -30,16 +24,13 @@
       padding: 0 20px;
     }
 
-    .main-content {
-      flex: 1;
-    }
-
     /* —————— Logo + 标题 —————— */
     .header-top {
       display: flex;
       align-items: center;
       padding: 20px 0;
       min-height: 80px;
+      justify-content: space-between;
     }
 
     .logo {
@@ -63,7 +54,7 @@
     }
 
     .site-title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
       color: #333;
       margin-bottom: 4px;
@@ -74,6 +65,10 @@
       color: #666;
     }
 
+    /* —————— 主体内容区域（撑开以让页脚贴底） —————— */
+    .main-content {
+      flex: 1;
+    }
     /* —————— 导航栏 —————— */
     nav {
       margin: 15px 0 30px;
@@ -116,7 +111,7 @@
     }
 
     .news-list {
-      max-width: 800px;
+      max-width: 960px;
       margin: 0 auto;
       list-style: none;
     }
@@ -202,16 +197,24 @@
 </head>
 <body>
 
-  <div class="main-content">
-    <div class="container">
-      <!-- Logo + 标题 -->
-      <div class="header-top">
-        <div class="logo">LOGO</div>
+  <div class="container">
+    <!-- Logo + Title + Hamburger -->
+  <div class="container">
+    <div class="header-top">
+      <div style="display: flex; align-items: center;">
+        <img src="./statics/picture/logo.png" alt="logo" class="logo">
         <div class="site-title-group">
-          <div class="site-title">PQC-Huanglab</div>
+          <div class="site-title">PQC-Huanglab | IMB, Nanjing University</div>
           <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
         </div>
       </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+</div>
 
       <!-- 导航栏（News 高亮） -->
       <nav>

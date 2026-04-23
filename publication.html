@@ -11,17 +11,11 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-    }
-
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
       background-color: #fff;
       color: #333;
-      display: flex;
-      flex-direction: column;
     }
 
     .container {
@@ -30,17 +24,13 @@
       padding: 0 20px;
     }
 
-    /* —————— 主体内容区域（撑开以让页脚贴底） —————— */
-    .main-content {
-      flex: 1;
-    }
-
     /* —————— Logo + 标题 —————— */
     .header-top {
       display: flex;
       align-items: center;
       padding: 20px 0;
       min-height: 80px;
+      justify-content: space-between;
     }
 
     .logo {
@@ -64,7 +54,7 @@
     }
 
     .site-title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
       color: #333;
       margin-bottom: 4px;
@@ -73,6 +63,11 @@
     .site-subtitle {
       font-size: 13px;
       color: #666;
+    }
+
+    /* —————— 主体内容区域（撑开以让页脚贴底） —————— */
+    .main-content {
+      flex: 1;
     }
 
     /* —————— 导航栏 —————— */
@@ -116,25 +111,56 @@
       color: #333;
     }
 
-    .pubs-list {
-      list-style: none;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+.pubs-list {
+  list-style: none;
+  width: 100%;
+  max-width: 960px; /* = 1200px - 2*20px padding */
+  margin: 0 auto;
+  padding: 0;
+}
 
     .pub-item {
       padding: 16px 0;
       border-bottom: 1px dashed #ddd;
+      display: flex;
+      align-items: flex-start;
+      position: relative;
     }
 
     .pub-item:last-child {
       border-bottom: none;
     }
 
+    .pub-cover {
+      width: 80px;
+      height: 80px;
+      margin-right: 16px;
+      flex-shrink: 0;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .pub-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pub-info {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+    }
+
     .pub-title {
       font-size: 17px;
       font-weight: bold;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       color: #222;
     }
 
@@ -148,17 +174,20 @@
       font-size: 14px;
       color: #007BFF;
       font-style: italic;
+      margin-bottom: 4px;
     }
 
     .pub-links {
-      margin-top: 6px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
       font-size: 13px;
     }
 
     .pub-links a {
       color: #007BFF;
       text-decoration: none;
-      margin-right: 12px;
+      margin-left: 12px;
     }
 
     .pub-links a:hover {
@@ -172,7 +201,7 @@
       text-align: center;
       padding: 20px 0;
       font-size: 14px;
-      margin-top: auto; /* 确保在底部 */
+      margin-top: auto;
     }
 
     /* —————— 响应式 —————— */
@@ -196,6 +225,29 @@
       nav a {
         width: fit-content;
       }
+      
+      .pub-item {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .pub-cover {
+        margin-right: 0;
+        margin-bottom: 12px;
+        width: 60px;
+        height: 60px;
+      }
+      
+      .pub-info {
+        position: relative;
+        padding-top: 12px;
+      }
+      
+      .pub-links {
+        position: static;
+        text-align: right;
+        margin-top: 8px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -213,41 +265,61 @@
       .site-subtitle {
         font-size: 12px;
       }
+      
+      .pub-cover {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .pub-links a {
+        margin-left: 8px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- 主体内容（可伸缩） -->
-  <div class="main-content">
-    <div class="container">
-      <!-- Logo + 标题 -->
-      <div class="header-top">
-        <div class="logo">LOGO</div>
+  <div class="container">
+    <!-- Logo + Title + Hamburger -->
+  <div class="container">
+    <div class="header-top">
+      <div style="display: flex; align-items: center;">
+        <img src="./statics/picture/logo.png" alt="logo" class="logo">
         <div class="site-title-group">
-          <div class="site-title">PQC-Huanglab</div>
+          <div class="site-title">PQC-Huanglab | IMB, Nanjing University</div>
           <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
         </div>
       </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+</div>
 
-      <!-- 导航栏 -->
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="publication.html" class="active">Publication</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="affairs.html">Affairs</a></li>
-          <li><a href="news.html">News</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </nav>
+    <!-- 导航栏 -->
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="publication.html" class="active">Publication</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="affairs.html">Affairs</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
 
-      <!-- Publications 列表 -->
-      <section class="content-section">
-        <h1 class="section-title">Selected Publications</h1>
-        <ul class="pubs-list">
-          <li class="pub-item">
+    <!-- Publications 列表 -->
+    <section class="content-section">
+      <h1 class="section-title">Selected Publications</h1>
+      <ul class="pubs-list">
+        <li class="pub-item">
+          <div class="pub-cover">
+            <img src="https://via.placeholder.com/80x80/e0e0e0/999999?text=Nat+Cell+Bio" alt="Nature Cell Biology cover">
+          </div>
+          <div class="pub-info">
             <div class="pub-title">ER-associated degradation safeguards proteostasis during aging</div>
             <div class="pub-authors">Zhang Y, Liu X, Huang Lab*</div>
             <div class="pub-journal">Nature Cell Biology, 2026</div>
@@ -256,8 +328,13 @@
               <a href="#" target="_blank">DOI</a>
               <a href="#" target="_blank">Supp</a>
             </div>
-          </li>
-          <li class="pub-item">
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-cover">
+            <img src="https://via.placeholder.com/80x80/e0e0e0/999999?text=Neuron" alt="Neuron cover">
+          </div>
+          <div class="pub-info">
             <div class="pub-title">A novel E3 ligase regulates tau clearance in Alzheimer’s models</div>
             <div class="pub-authors">Wang L, Chen R, Huang Lab*</div>
             <div class="pub-journal">Neuron, 2026</div>
@@ -265,8 +342,13 @@
               <a href="#" target="_blank">PDF</a>
               <a href="#" target="_blank">DOI</a>
             </div>
-          </li>
-          <li class="pub-item">
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-cover">
+            <img src="https://via.placeholder.com/80x80/e0e0e0/999999?text=Cell+Metab" alt="Cell Metabolism cover">
+          </div>
+          <div class="pub-info">
             <div class="pub-title">Heat shock factor 1 coordinates proteostasis and metabolism</div>
             <div class="pub-authors">Li M, Zhao K, Huang Lab*</div>
             <div class="pub-journal">Cell Metabolism, 2025</div>
@@ -274,8 +356,13 @@
               <a href="#" target="_blank">PDF</a>
               <a href="#" target="_blank">DOI</a>
             </div>
-          </li>
-          <li class="pub-item">
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-cover">
+            <img src="https://via.placeholder.com/80x80/e0e0e0/999999?text=JCI" alt="Journal of Clinical Investigation cover">
+          </div>
+          <div class="pub-info">
             <div class="pub-title">Selective autophagy of misfolded SOD1 in ALS</div>
             <div class="pub-authors">Huang Q, Sun T, Huang Lab*</div>
             <div class="pub-journal">Journal of Clinical Investigation, 2025</div>
@@ -283,8 +370,13 @@
               <a href="#" target="_blank">PDF</a>
               <a href="#" target="_blank">DOI</a>
             </div>
-          </li>
-          <li class="pub-item">
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-cover">
+            <img src="https://via.placeholder.com/80x80/e0e0e0/999999?text=Mol+Cell" alt="Molecular Cell cover">
+          </div>
+          <div class="pub-info">
             <div class="pub-title">Deubiquitinase USP19 stabilizes HSP70 under stress</div>
             <div class="pub-authors">Yang J, Huang Lab*</div>
             <div class="pub-journal">Molecular Cell, 2024</div>
@@ -292,13 +384,13 @@
               <a href="#" target="_blank">PDF</a>
               <a href="#" target="_blank">DOI</a>
             </div>
-          </li>
-        </ul>
-      </section>
-    </div>
+          </div>
+        </li>
+      </ul>
+    </section>
   </div>
 
-  <!-- 页脚（始终在底部） -->
+  <!-- 页脚 -->
   <footer>
     <div class="container">
       &copy; 2026 PQC-Huanglab. All rights reserved.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,10 +11,7 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-    }
-
+    /* ✅ 新增：让 body 成为 flex 容器，最小高度为视口高度 */
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
@@ -22,6 +19,7 @@
       color: #333;
       display: flex;
       flex-direction: column;
+      min-height: 100vh; /* 关键：至少占满视口 */
     }
 
     .container {
@@ -30,16 +28,13 @@
       padding: 0 20px;
     }
 
-    .main-content {
-      flex: 1;
-    }
-
-    /* —————— Logo + 标题 —————— */
+    /* —————— Logo + Title —————— */
     .header-top {
       display: flex;
       align-items: center;
       padding: 20px 0;
       min-height: 80px;
+      justify-content: space-between;
     }
 
     .logo {
@@ -63,7 +58,7 @@
     }
 
     .site-title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
       color: #333;
       margin-bottom: 4px;
@@ -74,7 +69,12 @@
       color: #666;
     }
 
-    /* —————— 导航栏 —————— */
+    /* —————— Main Content Wrapper —————— */
+    .main-content {
+      flex: 1; /* ✅ 关键：撑开剩余空间 */
+    }
+
+    /* —————— Navigation —————— */
     nav {
       margin: 15px 0 30px;
     }
@@ -103,7 +103,7 @@
       color: #007BFF;
     }
 
-    /* —————— Contact 内容区 —————— */
+    /* —————— Contact Section —————— */
     .content-section {
       padding: 20px 0 40px;
     }
@@ -116,11 +116,12 @@
     }
 
     .contact-info {
-      max-width: 700px;
+      max-width: 960px; /* = 1200 - 2*20 - 但实际受外层 container 控制 */
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
+      width: 100%;
     }
 
     .info-card {
@@ -128,6 +129,7 @@
       padding: 24px;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      width: 100%;
     }
 
     .info-title {
@@ -162,29 +164,17 @@
       text-decoration: underline;
     }
 
-    /* 地图占位（可替换为 iframe） */
-    .map-placeholder {
-      background: #f5f5f5;
-      height: 200px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-style: italic;
-    }
-
-    /* —————— 页脚 —————— */
+    /* —————— Footer —————— */
     footer {
       background-color: #333;
       color: #fff;
       text-align: center;
       padding: 20px 0;
       font-size: 14px;
-      margin-top: auto;
+      margin-top: auto; /* 辅助贴底（可选） */
     }
 
-    /* —————— 响应式 —————— */
+    /* —————— Responsive —————— */
     @media (max-width: 768px) {
       .header-top {
         flex-direction: column;
@@ -231,63 +221,94 @@
 </head>
 <body>
 
+  <!-- ✅ 主内容区：用 .main-content 包裹，实现 flex:1 -->
   <div class="main-content">
+    <!-- 外层 container -->
     <div class="container">
-      <!-- Logo + 标题 -->
-      <div class="header-top">
-        <div class="logo">LOGO</div>
-        <div class="site-title-group">
-          <div class="site-title">PQC-Huanglab</div>
-          <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
+      <!-- 内层 container（匹配 Publications 的冗余结构） -->
+      <div class="container">
+        <div class="header-top">
+          <div style="display: flex; align-items: center;">
+            <img src="./statics/picture/logo.png" alt="logo" class="logo">
+            <div class="site-title-group">
+              <div class="site-title">PQC-Huanglab | IMB, Nanjing University</div>
+              <div class="site-subtitle">Protein Quality Control and Disease</div>
+            </div>
+          </div>
+          <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </div>
 
-      <!-- 导航栏（Contact Us 高亮） -->
+      <!-- Navigation -->
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="research.html">Research</a></li>
           <li><a href="publication.html">Publication</a></li>
           <li><a href="team.html">Team</a></li>
-          <li><a href="#affairs">Affairs</a></li>
+          <li><a href="affairs.html">Affairs</a></li>
           <li><a href="news.html">News</a></li>
           <li><a href="contact.html" class="active">Contact Us</a></li>
         </ul>
       </nav>
 
-      <!-- Contact 内容 -->
+      <!-- Contact Content -->
       <section class="content-section">
         <h1 class="section-title">Contact Us</h1>
         <div class="contact-info">
           <div class="info-card">
             <div class="info-title">Lab Address</div>
             <div class="info-item">
-              <div class="info-label">Building:</div>
-              <div class="info-value">Institute of Modern Biology, Nanjing University, Room 410</div>
+              <div class="info-label">Address:</div>
+              <div class="info-value">Room 501, Building B<br>School of Medicine, Nanjing University<br>22 Hankou Road, Gulou District<br>Nanjing, Jiangsu 210093, China</div>
             </div>
             <div class="info-item">
-              <div class="info-label">Institution:</div>
-              <div class="info-value">Institute of Modern Biology, Nanjing University</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">City:</div>
-              <div class="info-value">Nanjing, Jiangsu 210023</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Country:</div>
-              <div class="info-value">China</div>
+              <div class="info-label">Postal Code:</div>
+              <div class="info-value">210093</div>
             </div>
           </div>
-
+          
           <div class="info-card">
             <div class="info-title">Contact Info</div>
             <div class="info-item">
-              <div class="info-label">PI Email:</div>
-              <div class="info-value"><a href="lqhuang@nju.edu.cn">lqhuang@nju.edu.cn</a></div>
+              <div class="info-label">Phone:</div>
+              <div class="info-value">+86-25-1234-5678</div>
             </div>
             <div class="info-item">
-              <div class="info-label">Website:</div>
-              <div class="info-value"><a href="https://www.pqc-huanglab.com" target="_blank">https://www.pqc-huanglab.com</a></div>
+              <div class="info-label">Fax:</div>
+              <div class="info-value">+86-25-1234-5679</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Email:</div>
+              <div class="info-value">
+                <a href="mailto:huanglab@nju.edu.cn">huanglab@nju.edu.cn</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">PI Email:</div>
+              <div class="info-value">
+                <a href="mailto:qhuang@nju.edu.cn">qhuang@nju.edu.cn</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-title">Join Us</div>
+            <div class="info-item">
+              <div class="info-label">Careers:</div>
+              <div class="info-value">
+                <a href="mailto:huanglab@nju.edu.cn?subject=Job Inquiry">Email us for position opportunities</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Visiting:</div>
+              <div class="info-value">
+                <a href="mailto:qhuang@nju.edu.cn?subject=Visiting Scholar Application">Contact PI for visiting scholar applications</a>
+              </div>
             </div>
           </div>
         </div>
@@ -295,7 +316,7 @@
     </div>
   </div>
 
-  <!-- 页脚 -->
+  <!-- Footer -->
   <footer>
     <div class="container">
       &copy; 2026 PQC-Huanglab. All rights reserved.
