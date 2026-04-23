@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -24,13 +24,13 @@
       padding: 0 20px;
     }
 
-    /* —————— Logo + 标题 —————— */
+    /* —————— Logo + Title —————— */
     .header-top {
       display: flex;
       align-items: center;
       padding: 20px 0;
       min-height: 80px;
-      justify-content: space-between; /* 为汉堡按钮留空间 */
+      justify-content: space-between;
     }
 
     .logo {
@@ -65,7 +65,7 @@
       color: #666;
     }
 
-    /* 汉堡按钮（仅移动端显示） */
+    /* Hamburger button (mobile only) */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -82,7 +82,7 @@
       transition: 0.3s;
     }
 
-    /* —————— 导航栏 —————— */
+    /* —————— Navigation —————— */
     nav {
       margin: 15px 0 30px;
     }
@@ -110,7 +110,7 @@
       color: #007BFF;
     }
 
-    /* —————— 轮播图等其他样式保持不变 —————— */
+    /* —————— Hero Slider —————— */
     .hero-slider {
       width: 100%;
       height: 350px;
@@ -220,19 +220,24 @@
       background-color: #f9f9f9;
     }
 
-    .news-section h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      position: relative;
+    .news-column-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .news-column-header h2 {
+      font-size: 20px;
+      color: #333;
+      margin: 0;
     }
 
     .news-more {
-      position: absolute;
-      top: 0;
-      right: 10px;
       font-size: 14px;
       color: #888;
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .news-more:hover {
@@ -243,13 +248,21 @@
     .news-table {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
+      gap: 30px;
       width: 100%;
       margin: 0 auto;
     }
 
+    .news-column {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
     .news-col {
       list-style: none;
+      padding: 0;
     }
 
     .news-col li {
@@ -287,12 +300,15 @@
       text-decoration: none;
       color: #555;
       white-space: nowrap;
-      padding: 4px 8px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      min-width: 60px;
     }
 
     .friend-links a:hover {
       color: #007BFF;
-      text-decoration: underline;
+      background-color: #f0f8ff;
     }
 
     footer {
@@ -303,9 +319,8 @@
       font-size: 14px;
     }
 
-    /* —————— 响应式：移动端调整 —————— */
+    /* —————— Responsive: Mobile —————— */
     @media (max-width: 768px) {
-      /* Logo 和标题在同一行 */
       .header-top {
         flex-direction: row;
         align-items: center;
@@ -321,12 +336,10 @@
         align-items: flex-start;
       }
 
-      /* 显示汉堡按钮 */
       .hamburger {
         display: flex;
       }
 
-      /* 隐藏导航栏，默认不显示 */
       nav ul {
         display: none;
         flex-direction: column;
@@ -357,6 +370,10 @@
       .news-table {
         grid-template-columns: 1fr;
         gap: 20px;
+      }
+
+      .news-column {
+        padding: 15px;
       }
 
       .news-col li {
@@ -392,6 +409,27 @@
         right: auto;
         bottom: auto;
       }
+
+      /* Friend links: single line on mobile */
+      .friend-links {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 15px 0;
+        gap: 12px 16px;
+        font-size: 13px;
+      }
+
+      .friend-title {
+        margin-right: 12px;
+        font-size: 13px;
+      }
+
+      .friend-links a {
+        padding: 6px 8px;
+        font-size: 13px;
+        min-width: auto;
+      }
     }
 
     @media (max-width: 480px) {
@@ -407,9 +445,24 @@
         font-size: 18px;
       }
       .site-title {
-        font-size: 14px;
+        font-size: 20px;
       }
       .site-subtitle {
+        font-size: 12px;
+      }
+
+      .friend-links {
+        gap: 10px 14px;
+        font-size: 12px;
+      }
+
+      .friend-title {
+        margin-right: 10px;
+        font-size: 12px;
+      }
+
+      .friend-links a {
+        padding: 5px 7px;
         font-size: 12px;
       }
     }
@@ -418,12 +471,13 @@
 <body>
 
   <div class="container">
-    <!-- Logo + 标题 + 汉堡按钮 -->
+    <!-- Logo + Title + Hamburger -->
+  <div class="container">
     <div class="header-top">
       <div style="display: flex; align-items: center;">
         <img src="./statics/picture/logo.png" alt="logo" class="logo">
         <div class="site-title-group">
-          <div class="site-title">PQC-Huanglab | Institute of Modern Biology, Nanjing University</div>
+          <div class="site-title">PQC-Huanglab | IMB, Nanjing University</div>
           <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
         </div>
       </div>
@@ -433,8 +487,9 @@
         <span></span>
       </div>
     </div>
+</div>
 
-    <!-- 导航栏 -->
+    <!-- Navigation -->
     <nav>
       <ul id="navMenu">
         <li><a href="#home">Home</a></li>
@@ -447,7 +502,7 @@
       </ul>
     </nav>
 
-    <!-- 轮播图 -->
+    <!-- Hero Slider -->
     <div class="hero-slider">
       <div class="slider-wrapper" id="sliderWrapper">
         <img src="./statics/picture/figure23.jpg" alt="Slide 1">
@@ -472,33 +527,44 @@
       </div>
     </section>
 
-    <!-- Latest News -->
+    <!-- Laboratory Rules & Latest News -->
     <section class="news-section">
-      <h2>
-        Latest News
-        <a href="/news" class="news-more">More</a>
-      </h2>
       <div class="news-table">
-        <ul class="news-col">
-          <li>2026-04-20 新论文发表于 Nature Cell Biology</li>
-          <li>2026-04-15 实验室获国家自然科学基金重点项目</li>
-          <li>2026-04-10 博士生李明获优秀研究生奖</li>
-          <li>2026-04-05 参加国际蛋白稳态大会</li>
-          <li>2026-04-01 新设备冷冻电镜安装完成</li>
-        </ul>
-        <ul class="news-col">
-          <li>Apr 20, 2026 New paper published in Nature Cell Biology</li>
-          <li>Apr 15, 2026 Lab awarded NSFC Key Project</li>
-          <li>Apr 10, 2026 PhD student Li Ming wins Outstanding Graduate Award</li>
-          <li>Apr 5, 2026 Attended International Proteostasis Conference</li>
-          <li>Apr 1, 2026 Cryo-EM installed successfully in the lab</li>
-        </ul>
+        <!-- Left Column: Lab Rules -->
+        <div class="news-column">
+          <div class="news-column-header">
+            <h2>Laboratory Rules</h2>
+            <a href="/rules" class="news-more">More </a>
+          </div>
+          <ul class="news-col">
+            <li>Mar 15, 2026 – Lab Safety Training Required</li>
+            <li>Mar 10, 2026 – Updated Equipment Booking Policy</li>
+            <li>Mar 5, 2026 – Data Management Guidelines</li>
+            <li>Mar 1, 2026 – Lab Notebook Standards</li>
+            <li>Feb 25, 2026 – Authorship Policy Revised</li>
+          </ul>
+        </div>
+        
+        <!-- Right Column: Latest News -->
+        <div class="news-column">
+          <div class="news-column-header">
+            <h2>Latest News</h2>
+            <a href="/news" class="news-more">More </a>
+          </div>
+          <ul class="news-col">
+            <li>Apr 20, 2026 – New paper published in Nature Cell Biology</li>
+            <li>Apr 15, 2026 – Lab awarded NSFC Key Project</li>
+            <li>Apr 10, 2026 – PhD student Li Ming wins Outstanding Graduate Award</li>
+            <li>Apr 5, 2026 – Attended International Proteostasis Conference</li>
+            <li>Apr 1, 2026 – Cryo-EM installed successfully in the lab</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- 友情链接 -->
+    <!-- Friend Links -->
     <div class="friend-links">
-      <span class="friend-title">Collaborators:</span>
+      <span class="friend-title">Links:</span>
       <a href="https://www.nju.edu.cn/" target="_blank">Nanjing University</a>
       <a href="https://imb.nju.edu.cn/index.html" target="_blank">Institute of Modern Biology</a>
       <a href="https://imb.nju.edu.cn/rcdw/zzpxl/20220402/i220299.html" target="_blank">PI introduction</a>
@@ -512,7 +578,7 @@
     </div>
   </footer>
 
-  <!-- 轮播脚本 -->
+  <!-- Slider Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const wrapper = document.getElementById('sliderWrapper');
@@ -582,13 +648,12 @@
 
       startAutoPlay();
 
-      // 汉堡菜单交互
+      // Hamburger menu toggle
       const hamburger = document.getElementById('hamburger');
       const navMenu = document.getElementById('navMenu');
 
       hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('show');
-        // 可选：添加动画效果（如旋转）
         const spans = hamburger.querySelectorAll('span');
         if (navMenu.classList.contains('show')) {
           spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
