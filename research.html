@@ -172,6 +172,18 @@
       margin-bottom: 8px;
     }
 
+.full-width-image {
+  width: 100%;
+  overflow: hidden;
+}
+
+.full-width-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
     /* —————— 页脚 —————— */
     footer {
       background-color: #333;
@@ -261,10 +273,8 @@
 </head>
 <body>
 
-  <!-- ✅ 主内容区包裹器（实现 flex:1） -->
   <div class="main-content">
     <div class="container">
-      <!-- 双重 container（保持结构一致性） -->
       <div class="container">
         <div class="header-top">
           <div style="display: flex; align-items: center;">
@@ -299,43 +309,15 @@
       <section class="content-section">
         <h1 class="section-title">Research Focus</h1>
         <div class="research-detail-card">
-          <h2 class="card-title">Protein Folding & Misfolding in Neurodegenerative Diseases</h2>
-
+          <h2 class="card-title">DAXX represents a new type of protein-folding enabler</h2>
           <p class="card-text">
-            Proper protein folding is essential for cellular function. In the endoplasmic reticulum (ER), molecular chaperones and folding enzymes assist nascent polypeptides to achieve their native conformations. However, genetic mutations, environmental stress, or aging can disrupt this delicate process, leading to the accumulation of misfolded proteins—a hallmark of many neurodegenerative disorders.
+            Protein quality control systems are crucial for cellular function and organismal health. At present, most known protein quality control systems are multicomponent machineries that operate via ATP-regulated interactions with non-native proteins to prevent aggregation and promote folding, and few systems that can broadly enable protein folding by a different mechanism have been identified. Moreover, proteins that contain the extensively charged poly-Asp/Glu (polyD/E) region are common in eukaryotic proteomes, but their biochemical activities remain undefined. Here we show that DAXX, a polyD/E protein that has been implicated in diverse cellular processes, possesses several protein-folding activities. DAXX prevents aggregation, solubilizes pre-existing aggregates and unfolds misfolded species of model substrates and neurodegeneration-associated proteins. Notably, DAXX effectively prevents and reverses aggregation of its in vivo-validated client proteins, the tumour suppressor p53 and its principal antagonist MDM2. DAXX can also restore native conformation and function to tumour-associated, aggregation-prone p53 mutants, reducing their oncogenic properties. These DAXX activities are ATP-independent and instead rely on the polyD/E region. Other polyD/E proteins, including ANP32A and SET, can also function as stand-alone, ATP-independent molecular chaperones, disaggregases and unfoldases. Thus, polyD/E proteins probably constitute a multifunctional protein quality control system that operates via a distinctive mechanism.
           </p>
 
-          <h3>Our Research Goals</h3>
-          <p class="card-text">
-            We aim to elucidate the structural and mechanistic basis of protein misfolding and its clearance pathways, with a focus on:
-          </p>
-          <ul class="card-text">
-            <li>How disease-associated mutations impair folding kinetics and stability</li>
-            <li>The role of ER-resident chaperones (e.g., BiP, calnexin) in triaging clients</li>
-            <li>Cross-talk between ER quality control and cytosolic degradation systems</li>
-          </ul>
-
-          <h3>Key Methodologies</h3>
-          <p class="card-text">
-            Our lab integrates multidisciplinary approaches:
-          </p>
-          <ul class="card-text">
-            <li><strong>Structural Biology:</strong> Cryo-EM and X-ray crystallography of chaperone-client complexes</li>
-            <li><strong>Biochemistry:</strong> In vitro reconstitution of folding/degradation assays</li>
-            <li><strong>Cell Biology:</strong> Live-cell imaging, CRISPR-Cas9 gene editing, and proteostasis reporters</li>
-            <li><strong>Disease Models:</strong> Patient-derived iPSCs and transgenic mouse models</li>
-          </ul>
-
-          <h3>Current Projects</h3>
-          <ul class="card-text">
-            <li>Structural dynamics of mutant SOD1 in ALS pathogenesis</li>
-            <li>Mechanism of tau aggregation suppression by Hsp70 co-chaperones</li>
-            <li>Development of small-molecule correctors for α-synuclein misfolding in Parkinson’s disease</li>
-          </ul>
-
-          <p class="card-text">
-            By bridging molecular mechanism with pathological relevance, we strive to identify novel therapeutic strategies that restore proteostasis in neurodegenerative conditions.
-          </p>
+        <!-- 全宽图片区域 -->
+<div class="full-width-image">
+  <img src="./statics/picture/research.jpg" alt="Research Banner">
+</div>
         </div>
       </section>
     </div>
