@@ -1,11 +1,16 @@
-
 <!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <link rel="shortcut icon" type="image/x-icon" href="./statics/picture/logo.png" sizes="16x16">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PQC-Huanglab - Team</title>
   <style>
+    /* 确保 html 占满高度，配合 body 的 flex 布局 */
+    html {
+      height: 100%;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -19,13 +24,14 @@
       color: #333;
       display: flex;
       flex-direction: column;
-      min-height: 100vh; 
+      min-height: 100vh; /* 关键：至少占满视口高度 */
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
+      width: 100%;
     }
 
     /* —————— Logo + 标题 —————— */
@@ -49,6 +55,7 @@
       font-weight: bold;
       font-size: 20px;
       flex-shrink: 0;
+      object-fit: cover; /* 防止图片变形 */
     }
 
     .site-title-group {
@@ -70,12 +77,14 @@
 
     /* —————— 主体内容区域（撑开剩余空间） —————— */
     .main-content {
-      flex: 1; /* 关键：让内容区填充剩余空间 */
+      flex: 1; /* 关键：占据除 footer 外的所有剩余空间 */
+      display: flex;
+      flex-direction: column;
     }
 
     /* —————— 汉堡按钮基础样式 —————— */
     .hamburger {
-      display: none; /* 默认隐藏 */
+      display: none;
       flex-direction: column;
       justify-content: space-between;
       width: 30px;
@@ -121,7 +130,8 @@
 
     /* —————— Team 内容区 —————— */
     .content-section {
-      padding: 20px 0 40px;
+      padding: 20px 0 60px; /* 修改：增加底部 padding (从 40px 改为 60px)，留出呼吸空间 */
+      flex: 1; /* 让内容区在 main-content 内部也能伸展 */
     }
 
     .section-title {
@@ -135,7 +145,8 @@
       margin-bottom: 40px;
       width: 100%;
       max-width: 960px;
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto; /* 修正 margin 简写覆盖问题 */
       padding: 0;
     }
 
@@ -160,6 +171,12 @@
       padding: 16px;
       text-align: center;
       box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    
+    .member-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .member-avatar {
@@ -168,9 +185,8 @@
       border-radius: 50%;
       background: #ddd;
       margin: 0 auto 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block; /* 改为 block 以便 object-fit 生效 */
+      object-fit: cover; /* 关键：防止头像变形 */
       color: #999;
       font-weight: bold;
       font-size: 16px;
@@ -202,9 +218,10 @@
       text-align: center;
       padding: 20px 0;
       font-size: 14px;
+      margin-top: auto; /* 双重保险：确保 footer 沉底 */
     }
 
-    /* —————— 响应式（关键修复） —————— */
+    /* —————— 响应式 —————— */
     @media (max-width: 768px) {
       .header-top {
         flex-direction: row;
@@ -221,12 +238,10 @@
         align-items: flex-start;
       }
 
-      /* 显示汉堡按钮 */
       .hamburger {
         display: flex;
       }
 
-      /* 隐藏默认导航 */
       nav ul {
         display: none;
         flex-direction: column;
@@ -240,7 +255,6 @@
         width: 100%;
       }
 
-      /* JS 控制显示 */
       nav ul.show {
         display: flex;
       }
@@ -279,25 +293,24 @@
 </head>
 <body>
 
-  <!-- ✅ 主内容区包裹器（实现 flex:1） -->
+  <!-- ✅ 主内容区包裹器 -->
   <div class="main-content">
     <div class="container">
-      <!-- 双重 container（保持结构一致性） -->
-      <div class="container">
-        <div class="header-top">
-          <div style="display: flex; align-items: center;">
-        <a href="./" style="text-decoration: none;">
-        <img src="./statics/picture/logo.png" alt="logo" class="logo">
-        <div class="site-title-group">
-          <div class="site-title">PQC-Huanglab | IMB, Nanjing University</div>
-          <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div></a>
+      <!-- 头部 -->
+      <div class="header-top">
+        <div style="display: flex; align-items: center;">
+          <a href="./" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="./statics/picture/logo.png" alt="logo" class="logo">
+            <div class="site-title-group">
+              <div class="site-title">PQC-Huanglab | IMB, Nanjing University</div>
+              <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div>
             </div>
-          </div>
-          <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          </a>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
 
@@ -345,105 +358,104 @@
         <div class="team-group">
           <div class="group-title">PhD Students</div>
           <div class="members-grid">
-
             <div class="member-card">
              <img src="./statics/teampic/zhaoguomeng.jpg" alt="Guomeng Zhao" class="member-avatar">
               <div class="member-name">Guomeng Zhao</div>
-              <div class="member-role">Year 3</div>
+              <div class="member-role">Year 4</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/wangjiaqi.jpg" alt="Jiaqi Wang" class="member-avatar">
               <div class="member-name">Jiaqi Wang</div>
-              <div class="member-role">Year 1</div>
+              <div class="member-role">Year 2</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/lijinglin.jpg" alt="Jinglin Li" class="member-avatar">
               <div class="member-name">Jinglin Li</div>
-              <div class="member-role">Year 1</div>
+              <div class="member-role">Year 2</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/renkang.jpg" alt="Kang Ren" class="member-avatar">
               <div class="member-name">Kang Ren</div>
-              <div class="member-role">Year 3</div>
+              <div class="member-role">Year 4</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/renmeng.jpg" alt="Meng Ren" class="member-avatar">
               <div class="member-name">Meng Ren</div>
-              <div class="member-role">Year 3</div>
+              <div class="member-role">Year 4</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/luoqiudan.jpg" alt="Qiudan Luo" class="member-avatar">
               <div class="member-name">Qiudan Luo</div>
-              <div class="member-role">Year 2</div>
+              <div class="member-role">Year 3</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/huangrongsen.jpg" alt="Rongsen Huang" class="member-avatar">
               <div class="member-name">Rongsen Huang</div>
-              <div class="member-role">Year 2</div>
+              <div class="member-role">Year 3</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/jiangyuting.jpg" alt="Yuting Jiang" class="member-avatar">
               <div class="member-name">Yuting Jiang</div>
-              <div class="member-role">Year 2</div>
+              <div class="member-role">Year 3</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
           </div>
-        </div>
-      </div>
-
-
+        </div> 
+        <!-- ⚠️ 注意：这里删除了原代码中多余的一个 </div>，它导致了结构错乱 -->
 
         <!-- Master's Students -->
         <div class="team-group">
           <div class="group-title">Master's Students</div>
           <div class="members-grid">
             <div class="member-card">
-             <img src="./statics/teampic/chenyanfei.jpg" alt="Yanfei Chen" class="member-avatar">
-              <div class="member-name">Yanfei Chen</div>
-              <div class="member-role">Year 3</div>
-              <div class="member-bio">Protein chaperone</div>
-            </div>
-            <div class="member-card">
-             <img src="./statics/teampic/liuyun.jpg" alt="Yu Liu" class="member-avatar">
-              <div class="member-name">Yun Liu</div>
-              <div class="member-role">Year 3</div>
-              <div class="member-bio">Protein chaperone</div>
-            </div>
-            <div class="member-card">
              <img src="./statics/teampic/liuyuxin.jpg" alt="Yuxin Liu" class="member-avatar">
               <div class="member-name">Yuxin Liu</div>
-              <div class="member-role">Year 2</div>
+              <div class="member-role">Year 3</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/xuzihan.jpg" alt="Zihan Xu" class="member-avatar">
               <div class="member-name">Zihan Xu</div>
-              <div class="member-role">Year 2</div>
+              <div class="member-role">Year 3</div>
               <div class="member-bio">Protein chaperone</div>
             </div>
           </div>
         </div>
 
-        <!-- Undergraduates -->
+        <!-- Alumni -->
         <div class="team-group">
-          <div class="group-title">Alumni</div>
+          <div class="group-title">Graduated Students</div>
           <div class="members-grid">
             <div class="member-card">
              <img src="./statics/teampic/kangting.jpg" alt="Ting Kang" class="member-avatar">
               <div class="member-name">Ting Kang (2025)</div>
-              <div class="member-role">Protein chaperone</div>
+              <div class="member-role">Master</div>
+              <div class="member-bio">Protein chaperone</div>
             </div>
             <div class="member-card">
              <img src="./statics/teampic/wangyujie.jpg" alt="Yujie Wang" class="member-avatar">
               <div class="member-name">Yujie Wang (2025)</div>
-              <div class="member-role">Protein chaperone</div>
+              <div class="member-role">Master</div>
+              <div class="member-bio">Protein chaperone</div>
+            </div>
+            <div class="member-card">
+             <img src="./statics/teampic/chenyanfei.jpg" alt="Yanfei Chen" class="member-avatar">
+              <div class="member-name">Yanfei Chen (2026)</div>
+              <div class="member-role">Master</div>
+              <div class="member-bio">Protein chaperone</div>
+            </div>
+            <div class="member-card">
+             <img src="./statics/teampic/liuyun.jpg" alt="Yu Liu" class="member-avatar">
+              <div class="member-name">Yun Liu (2026)</div>
+              <div class="member-role">Master</div>
+              <div class="member-bio">Protein chaperone</div>
             </div>
           </div>
         </div>
