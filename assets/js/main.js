@@ -290,11 +290,7 @@
 
       var link = document.createElement('a');
       link.textContent = item.title || '';
-      link.href = item.link || detailHref(item);
-      if (isExternal(item.link)) {
-        link.target = '_blank';
-        link.rel = 'noopener';
-      }
+      link.href = detailHref(item);
       li.appendChild(link);
 
       list.appendChild(li);
@@ -321,13 +317,9 @@
       var heading = document.createElement('h3');
       var titleLink = document.createElement('a');
       titleLink.textContent = item.title || '';
-      titleLink.href = item.link || detailHref(item);
+      titleLink.href = detailHref(item);
       titleLink.style.color = 'inherit';
       titleLink.style.textDecoration = 'none';
-      if (isExternal(item.link)) {
-        titleLink.target = '_blank';
-        titleLink.rel = 'noopener';
-      }
       heading.appendChild(titleLink);
       body.appendChild(heading);
 

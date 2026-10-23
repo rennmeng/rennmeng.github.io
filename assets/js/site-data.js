@@ -30,6 +30,19 @@ var SITE_DATA = {
   /* —— 实验室动态（首页 Latest News + News 页 + 详情页）—— */
   news: [
     {
+      date: "2026-08-21",
+      title: "Our YTHDC1 study is published in Nature Communications",
+      text: "YTHDC1 functions as a molecular chaperone to suppress ALS-linked hnRNPA1 mutants from aggregation.",
+      body: [
+        "Our study \"YTHDC1 functions as a molecular chaperone to suppress ALS-linked hnRNPA1 mutants from aggregation\" was published in Nature Communications on 21 August 2026.",
+        "In this work, we identify the m6A-binding protein YTHDC1 as an ATP-independent molecular chaperone. YTHDC1 suppresses ALS-linked hnRNPA1 mutants from aggregation through its acidic polyD/E segment, independent of m6A recognition, highlighting its chaperone activity as a potential target for mitigating protein aggregation in ALS-related neurodegenerative disorders.",
+        "Kang Ren is the first author of this study."
+      ],
+      image: "",
+      link: "https://www.nature.com/articles/s41467-026-77016-y",
+      id: ""
+    },
+    {
       date: "2026-06-22",
       title: "Huge congratulations to Yanfei Chen & Yun Liu on graduating!",
       text: "Wishing them all the best in their future careers.",
