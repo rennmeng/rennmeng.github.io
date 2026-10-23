@@ -1,0 +1,476 @@
+/* ==========================================================================
+   PQC-Huanglab — shared site scripts (single file for all pages)
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------
+   * Site configuration
+   *
+   * gaMeasurementId — Google Analytics 4 (optional, full visit analytics)
+   *   1. Create a property for this site at https://analytics.google.com
+   *   2. Paste its measurement ID below, e.g. 'G-XXXXXXXXXX'
+   *   3. Leave the value empty ('') to keep GA disabled.
+   *
+   * visitCounter — public page-view counter shown in the footer,
+   *   powered by the busuanzi service (no registration needed).
+   * ---------------------------------------------------------------- */
+  var SITE = {
+    gaMeasurementId: '',
+    visitCounter: true
+  };
+
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  /* ---------- Mobile navigation (hamburger) ---------- */
+  function initNav() {
+    var button = document.getElementById('hamburger');
+    var nav = document.getElementById('site-nav');
+    if (!button || !nav) return;
+
+    button.addEventListener('click', function () {
+      var open = document.body.classList.toggle('nav-open');
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Close the panel after tapping a link (mobile)
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) {
+        document.body.classList.remove('nav-open');
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  /* ---------- Highlight the current page in the menu ---------- */
+  function initActiveNav() {
+    var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    var links = document.querySelectorAll('.nav-list a');
+    for (var i = 0; i < links.length; i++) {
+      var href = (links[i].getAttribute('href') || '').toLowerCase();
+      if (href === page) {
+        links[i].classList.add('active');
+      }
+    }
+  }
+
+  /* ---------- Homepage hero slider (crossfade) ---------- */
+  function initHeroSlider() {
+    var slider = document.getElementById('heroSlider');
+    if (!slider) return;
+
+    var slides = slider.querySelectorAll('.hero-slide');
+    var dotsWrap = slider.querySelector('.hero-dots');
+    var prevBtn = slider.querySelector('.hero-arrow.prev');
+    var nextBtn = slider.querySelector('.hero-arrow.next');
+    if (!slides.length || !dotsWrap) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var current = 0;
+    var timer = null;
+
+    // Build one dot per slide
+    for (var i = 0; i < slides.length; i++) {
+      (function (index) {
+        var dot = document.createElement('button');
+        dot.className = 'hero-dot';
+        dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
+        dot.addEventListener('click', function () {
+          goTo(index);
+          restart();
+        });
+        dotsWrap.appendChild(dot);
+      })(i);
+    }
+
+    var dots = dotsWrap.querySelectorAll('.hero-dot');
+
+    function goTo(index) {
+      slides[current].classList.remove('is-active');
+      dots[current].classList.remove('is-active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('is-active');
+      dots[current].classList.add('is-active');
+    }
+
+    function start() {
+      if (!reduced) {
+        timer = setInterval(function () { goTo(current + 1); }, 6000);
+      }
+    }
+
+    function stop() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function restart() {
+      stop();
+      start();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        goTo(current - 1);
+        restart();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        goTo(current + 1);
+        restart();
+      });
+    }
+
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', start);
+
+    goTo(0);
+    start();
+  }
+
+  /* ---------- Scroll-reveal animations ---------- */
+  function initReveal() {
+    var items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      for (var i = 0; i < items.length; i++) {
+        items[i].classList.add('is-visible');
+      }
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    for (var j = 0; j < items.length; j++) {
+      observer.observe(items[j]);
+    }
+  }
+
+  /* ---------- Back-to-top button ---------- */
+  function initBackToTop() {
+    var button = document.getElementById('backToTop');
+    if (!button) return;
+
+    function toggle() {
+      button.classList.toggle('show', window.scrollY > 400);
+    }
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+
+    button.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ---------- Footer year ---------- */
+  function initFooter() {
+    var year = document.getElementById('footer-year');
+    if (year) {
+      year.textContent = String(new Date().getFullYear());
+    }
+  }
+
+  /* ---------- Google Analytics 4 (optional) ---------- */
+  function loadAnalytics() {
+    if (!SITE.gaMeasurementId) return;
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + SITE.gaMeasurementId;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', SITE.gaMeasurementId);
+  }
+
+  /* ---------- Public visit counter (busuanzi, shown in the footer) ---------- */
+  function loadVisitCounter() {
+    var slot = document.getElementById('visitStats');
+    if (!slot || !SITE.visitCounter) return;
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+    script.onerror = function () { slot.hidden = true; };
+    document.head.appendChild(script);
+
+    // The counter stays hidden until real numbers arrive; if the service
+    // is unreachable the footer simply shows no counter.
+    var tries = 0;
+    (function check() {
+      var pv = document.getElementById('busuanzi_value_site_pv');
+      if (pv && pv.textContent.replace(/\s/g, '') !== '') {
+        slot.hidden = false;
+        return;
+      }
+      if (++tries < 40) {
+        setTimeout(check, 250);
+      }
+    })();
+  }
+
+  /* ---------- Content lists (rendered from assets/js/site-data.js) ---------- */
+  function getSiteData() {
+    var data = window.SITE_DATA || {};
+    return {
+      news: Array.isArray(data.news) ? data.news : [],
+      life: Array.isArray(data.life) ? data.life : []
+    };
+  }
+
+  function byNewestFirst(items) {
+    return items.slice().sort(function (a, b) {
+      return String(b.date || '').localeCompare(String(a.date || ''));
+    });
+  }
+
+  function isExternal(url) {
+    return /^https?:/i.test(url || '');
+  }
+
+  /* Attach a stable type + id to every item so list pages and the
+     detail page agree on URLs (item.id wins when the author set one). */
+  function decorate(items, type) {
+    return byNewestFirst(items).map(function (item, i) {
+      var copy = {};
+      for (var key in item) { copy[key] = item[key]; }
+      copy._type = type;
+      copy._id = item.id || (type + '-' + (item.date || 'undated') + '-' + i);
+      return copy;
+    });
+  }
+
+  function detailHref(item) {
+    return './detail.html?id=' + encodeURIComponent(item._id);
+  }
+
+  function fillPanelList(id, items, moreHref) {
+    var list = document.getElementById(id);
+    if (!list) return;
+    list.innerHTML = '';
+
+    if (!items.length) {
+      var emptyLi = document.createElement('li');
+      var empty = document.createElement('span');
+      empty.className = 'panel-empty';
+      empty.textContent = 'Coming soon.';
+      emptyLi.appendChild(empty);
+      list.appendChild(emptyLi);
+      return;
+    }
+
+    items.forEach(function (item) {
+      var li = document.createElement('li');
+
+      var chip = document.createElement('span');
+      chip.className = 'news-chip';
+      chip.textContent = item.date || '';
+      li.appendChild(chip);
+
+      var link = document.createElement('a');
+      link.textContent = item.title || '';
+      link.href = item.link || detailHref(item);
+      if (isExternal(item.link)) {
+        link.target = '_blank';
+        link.rel = 'noopener';
+      }
+      li.appendChild(link);
+
+      list.appendChild(li);
+    });
+  }
+
+  function fillTimeline(id, items) {
+    var list = document.getElementById(id);
+    if (!list) return;
+    list.innerHTML = '';
+
+    items.forEach(function (item) {
+      var li = document.createElement('li');
+      li.className = 'timeline-item reveal';
+
+      var date = document.createElement('div');
+      date.className = 'timeline-date';
+      date.textContent = item.date || '';
+      li.appendChild(date);
+
+      var body = document.createElement('div');
+      body.className = 'timeline-body';
+
+      var heading = document.createElement('h3');
+      var titleLink = document.createElement('a');
+      titleLink.textContent = item.title || '';
+      titleLink.href = item.link || detailHref(item);
+      titleLink.style.color = 'inherit';
+      titleLink.style.textDecoration = 'none';
+      if (isExternal(item.link)) {
+        titleLink.target = '_blank';
+        titleLink.rel = 'noopener';
+      }
+      heading.appendChild(titleLink);
+      body.appendChild(heading);
+
+      if (item.text) {
+        var p = document.createElement('p');
+        p.textContent = item.text;
+        body.appendChild(p);
+      }
+
+      if (item.image) {
+        var img = document.createElement('img');
+        img.className = 'timeline-photo';
+        img.src = item.image;
+        img.alt = item.title || 'Photo';
+        img.loading = 'lazy';
+        body.appendChild(img);
+      }
+
+      if (item.link) {
+        var a = document.createElement('a');
+        a.className = 'btn-mini';
+        a.textContent = 'Details →';
+        a.href = item.link;
+        if (isExternal(item.link)) {
+          a.target = '_blank';
+          a.rel = 'noopener';
+        }
+        body.appendChild(a);
+      }
+
+      li.appendChild(body);
+      list.appendChild(li);
+    });
+  }
+
+  function renderContent() {
+    var data = getSiteData();
+    var news = decorate(data.news, 'news');
+    var life = decorate(data.life, 'life');
+    fillPanelList('homeNewsList', news.slice(0, 3), './news.html');
+    fillPanelList('homeLifeList', life.slice(0, 3), './life.html');
+    fillTimeline('newsTimeline', news);
+    fillTimeline('lifeTimeline', life);
+  }
+
+  /* ---------- Event detail page (detail.html?id=...) ---------- */
+  function initDetailPage() {
+    var wrap = document.getElementById('detailWrap');
+    if (!wrap) return;
+
+    var params = new URLSearchParams(window.location.search);
+    var wanted = params.get('id') || '';
+
+    var data = getSiteData();
+    var all = decorate(data.news, 'news').concat(decorate(data.life, 'life'));
+    var item = null;
+    for (var i = 0; i < all.length; i++) {
+      if (all[i]._id === wanted) { item = all[i]; break; }
+    }
+
+    var missing = document.getElementById('detailMissing');
+    var content = document.getElementById('detailContent');
+
+    if (!item) {
+      if (missing) missing.hidden = false;
+      if (content) content.hidden = true;
+      return;
+    }
+
+    var backLink = document.getElementById('detailBack');
+    if (backLink) {
+      backLink.href = item._type === 'life' ? './life.html' : './news.html';
+      backLink.textContent = item._type === 'life' ? '← Back to Group Life' : '← Back to News';
+    }
+
+    if (content) content.hidden = false;
+
+    var date = document.getElementById('detailDate');
+    if (date) date.textContent = item.date || '';
+
+    var type = document.getElementById('detailType');
+    if (type) type.textContent = item._type === 'life' ? 'Group Life' : 'News';
+
+    var title = document.getElementById('detailTitle');
+    if (title) title.textContent = item.title || '';
+
+    var cover = document.getElementById('detailCover');
+    if (cover) {
+      if (item.image) {
+        cover.src = item.image;
+        cover.alt = item.title || '';
+        cover.hidden = false;
+      } else {
+        cover.hidden = true;
+      }
+    }
+
+    var body = document.getElementById('detailBody');
+    if (body) {
+      body.innerHTML = '';
+      var paragraphs = Array.isArray(item.body) ? item.body : (item.body ? [item.body] : (item.text ? [item.text] : []));
+      paragraphs.forEach(function (text) {
+        var p = document.createElement('p');
+        p.textContent = text;
+        body.appendChild(p);
+      });
+      if (item.link && !isExternal(item.link)) {
+        var file = document.createElement('p');
+        var a = document.createElement('a');
+        a.className = 'btn-mini';
+        a.href = item.link;
+        a.textContent = 'Open attachment →';
+        file.appendChild(a);
+        body.appendChild(file);
+      }
+    }
+
+    var linkBtn = document.getElementById('detailLink');
+    if (linkBtn) {
+      if (item.link && isExternal(item.link)) {
+        linkBtn.href = item.link;
+        linkBtn.target = '_blank';
+        linkBtn.rel = 'noopener';
+        linkBtn.hidden = false;
+      } else {
+        linkBtn.hidden = true;
+      }
+    }
+
+    document.title = (item.title || 'News') + ' · PQC-Huanglab';
+  }
+
+  /* ---------- Boot ---------- */
+  ready(function () {
+    renderContent();
+    initDetailPage();
+    initNav();
+    initActiveNav();
+    initHeroSlider();
+    initReveal();
+    initBackToTop();
+    initFooter();
+    loadAnalytics();
+    loadVisitCounter();
+  });
+})();

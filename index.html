@@ -1,672 +1,134 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="shortcut icon" type="image/x-icon" href="./statics/picture/logo.png" sizes="16x16">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PQC-Huanglab</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background-color: #fff;
-      color: #333;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* —————— Logo + Title —————— */
-    .header-top {
-      display: flex;
-      align-items: center;
-      padding: 20px 0;
-      min-height: 80px;
-      justify-content: space-between;
-    }
-
-    .logo {
-      height: 60px;
-      width: 60px;
-      margin-right: 16px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-weight: bold;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .site-title-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .site-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 4px;
-    }
-
-    .site-subtitle {
-      font-size: 13px;
-      color: #666;
-    }
-
-    /* Hamburger button (mobile only) */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 21px;
-      cursor: pointer;
-    }
-
-    .hamburger span {
-      height: 3px;
-      width: 100%;
-      background-color: #333;
-      transition: 0.3s;
-    }
-
-    /* —————— Navigation —————— */
-    nav {
-      margin: 15px 0 30px;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      justify-content: space-around;
-      padding: 12px 0;
-      margin: 0;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 600;
-      white-space: nowrap;
-      padding: 6px 0;
-      border-radius: 4px;
-    }
-
-    nav a:hover {
-      color: #007BFF;
-    }
-
-    /* —————— Hero Slider —————— */
-    .hero-slider {
-      width: 100%;
-      height: 350px;
-      overflow: hidden;
-      border-radius: 8px;
-      margin: 20px 0;
-      position: relative;
-    }
-
-    .slider-wrapper {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .slider-wrapper img {
-      width: 100%;
-      height: 100%;
-      flex-shrink: 0;
-      object-fit: cover;
-    }
-
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      transition: background 0.3s;
-    }
-
-    .slider-btn:hover {
-      background: rgba(0, 0, 0, 0.8);
-    }
-
-    .slider-btn.prev {
-      left: 10px;
-    }
-
-    .slider-btn.next {
-      right: 10px;
-    }
-
-    .profile-section {
-      padding: 40px 0;
-    }
-
-    .profile-content {
-      display: flex;
-      align-items: flex-start;
-      gap: 30px;
-      position: relative;
-    }
-
-    .avatar {
-      width: 160px;
-      height: auto;
-      border-radius: 12px;
-      flex-shrink: 0;
-      border: 1px solid #eee;
-      display: block;
-    }
-
-    .profile-text {
-      font-size: 16px;
-      color: #555;
-      flex: 1;
-    }
-
-    .profile-text h2 {
-      margin-bottom: 15px;
-      font-size: 28px;
-    }
-
-    .profile-text p {
-      margin-bottom: 20px;
-    }
-
-    .detail-link {
-      position: absolute;
-      bottom: 0;
-      right: 10px;
-      color: #888;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: normal;
-    }
-
-    .detail-link:hover {
-      color: #007BFF;
-      text-decoration: underline;
-    }
-
-    .news-section {
-      padding: 40px 0;
-      background-color: #f9f9f9;
-    }
-
-    .news-column-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .news-column-header h2 {
-      font-size: 20px;
-      color: #333;
-      margin: 0;
-    }
-
-    .news-more {
-      font-size: 14px;
-      color: #888;
-      text-decoration: none;
-      white-space: nowrap;
-      font-weight: bold;
-    }
-
-    .news-more:hover {
-      color: #007BFF;
-      text-decoration: underline;
-    }
-
-    .news-table {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    .news-column {
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    .news-col {
-      list-style: none;
-      padding: 0;
-    }
-
-    .news-col li {
-      padding: 8px 0;
-      border-bottom: 1px dashed #ddd;
-      font-size: 14px;
-      color: #555;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      line-height: 1.4;
-    }
-
-    .friend-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px 30px;
-      padding: 25px 0;
-      border-top: 1px solid #eee;
-      margin-top: 25px;
-      font-size: 14px;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .friend-title {
-      font-weight: bold;
-      color: #333;
-      white-space: nowrap;
-      margin-right: 20px;
-    }
-
-    .friend-links a {
-      text-decoration: none;
-      color: #555;
-      white-space: nowrap;
-      padding: 6px 10px;
-      border-radius: 4px;
-      display: inline-block;
-      min-width: 60px;
-    }
-
-    .friend-links a:hover {
-      color: #007BFF;
-      background-color: #f0f8ff;
-    }
-
-    footer {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 20px 0;
-      font-size: 14px;
-    }
-
-    @media (max-width: 768px) {
-      .header-top {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logo {
-        margin-right: 12px;
-      }
-
-      .site-title-group {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-
-      .hamburger {
-        display: flex;
-      }
-
-      nav ul {
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 12px 0;
-        border: none;
-        background: #f9f9f9;
-        border-radius: 8px;
-        margin-top: 10px;
-        width: 100%;
-      }
-
-      nav ul.show {
-        display: flex;
-      }
-
-      nav a {
-        width: 100%;
-        padding: 8px 0;
-        text-align: left;
-      }
-
-      .hero-slider {
-        height: 240px;
-      }
-
-      .news-table {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .news-column {
-        padding: 15px;
-      }
-
-      .news-col li {
-        white-space: normal;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-
-      .profile-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-        position: static;
-      }
-
-      .avatar {
-        width: 100px;
-        height: auto;
-        margin: 0 auto;
-      }
-
-      .profile-text {
-        position: static;
-      }
-
-      .detail-link {
-        position: static;
-        display: inline-block;
-        text-align: center;
-        margin-top: 15px;
-        right: auto;
-        bottom: auto;
-      }
-
-      /* Friend links: single line on mobile */
-      .friend-links {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding: 15px 0;
-        gap: 12px 16px;
-        font-size: 13px;
-      }
-
-      .friend-title {
-        margin-right: 12px;
-        font-size: 13px;
-      }
-
-      .friend-links a {
-        padding: 6px 8px;
-        font-size: 13px;
-        min-width: auto;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 15px;
-      }
-      .hero-slider {
-        height: 200px;
-      }
-      .logo {
-        width: 50px;
-        height: 50px;
-        font-size: 18px;
-      }
-      .site-title {
-        font-size: 12px;
-      }
-      .site-subtitle {
-        font-size: 8px;
-      }
-
-      .friend-links {
-        gap: 10px 14px;
-        font-size: 12px;
-      }
-
-      .friend-title {
-        margin-right: 10px;
-        font-size: 12px;
-      }
-
-      .friend-links a {
-        padding: 5px 7px;
-        font-size: 12px;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PQC-Huanglab | Protein Quality Control Lab · IMB, Nanjing University</title>
+  <meta name="description" content="The Huang Lab (PQC-Huanglab) at the Institute of Modern Biology, Nanjing University studies protein quality control and its roles in neurodegenerative diseases, diabetes and cancer.">
+  <link rel="shortcut icon" type="image/x-icon" href="./statics/picture/logo.png">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="container">
-    <!-- Logo + Title + Hamburger -->
-  <div class="container">
-    <div class="header-top">
-      <div style="display: flex; align-items: center;">
-        <a href="./" style="text-decoration: none;">
-        <img src="./statics/picture/logo.png" alt="logo" class="logo">
-        <div class="site-title-group">
-          <div class="site-title">PQC-Huanglab | IMB, Nanjing University</div>
-          <div class="site-subtitle">蛋白质量控制与疾病 | Protein Quality Control and Disease</div></a>
-        </div>
-      </div>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="./statics/picture/logo.png" alt="PQC-Huanglab logo">
+        <span class="brand-text">
+          <span class="brand-title">PQC-Huanglab</span>
+          <span class="brand-sub">IMB, Nanjing University</span>
+          <span class="brand-cn">蛋白质量控制与疾病 · Protein Quality Control &amp; Disease</span>
+        </span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="./index.html" class="active">Home</a></li>
+          <li><a href="./research.html">Research</a></li>
+          <li><a href="./publication.html">Publications</a></li>
+          <li><a href="./team.html">Team</a></li>
+          <li><a href="./news.html">News</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-</div>
+  </header>
 
-    <!-- Navigation -->
-    <nav>
-      <ul id="navMenu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="./research.html">Research</a></li>
-        <li><a href="./publication.html">Publication</a></li>
-        <li><a href="./team.html">Team</a></li>
-        <li><a href="./news.html">News</a></li>
-        <li><a href="./contact.html">Contact Us</a></li>
-      </ul>
-    </nav>
-
-    <!-- Hero Slider -->
-    <div class="hero-slider">
-      <div class="slider-wrapper" id="sliderWrapper">
-        <img src="./statics/picture/figure23.jpg" alt="Slide 1">
-        <img src="./statics/picture/figure24.jpg" alt="Slide 2">
-        <img src="./statics/picture/figure24.jpg" alt="Slide 3">
-        <img src="./statics/picture/figure22.jpg" alt="Slide 4">
-        <img src="./statics/picture/figure24.jpg" alt="Slide 5">
-      </div>
-      <button class="slider-btn prev" aria-label="Previous slide">‹</button>
-      <button class="slider-btn next" aria-label="Next slide">›</button>
-    </div>
-
-    <!-- PI -->
-    <section class="profile-section">
-      <div class="profile-content">
-        <img src="./statics/picture/lqh.jpg" alt="Dr. Huang" class="avatar">
-        <div class="profile-text">
-          <h2>Principal Investigator</h2>
-          <p>Dr. Huang is leading the PQC (Protein Quality Control) Lab, with a research focus on the role and molecular mechanisms of the protein quality control system in cellular homeostasis. The protein quality control system is an essential cellular machinery that assists in the proper folding of proteins and maintains their correct three-dimensional conformation to ensure biological activity. Dysfunction of this system often leads to protein misfolding, which is closely associated with a range of human diseases, including Alzheimer’s disease and other neurodegenerative disorders, diabetes, and cancer.</p>
-          <a href="https://imb.nju.edu.cn/rcdw/zzpxl/20220402/i220299.html" class="detail-link">Detail</a>
+  <main id="main">
+    <!-- Hero slider -->
+    <section class="section hero-section">
+      <div class="container">
+        <div class="hero-slider" id="heroSlider" aria-label="Lab highlights">
+          <div class="hero-slide is-active"><img src="./statics/picture/figure22.jpg" alt="Lab activity photo"></div>
+          <div class="hero-slide"><img src="./statics/picture/figure23.jpg" alt="Lab activity photo — group gathering"></div>
+          <div class="hero-slide"><img src="./statics/picture/figure24.jpg" alt="Lab activity photo — group dinner"></div>
+          <button class="hero-arrow prev" aria-label="Previous slide">‹</button>
+          <button class="hero-arrow next" aria-label="Next slide">›</button>
+          <div class="hero-dots"></div>
         </div>
       </div>
     </section>
 
-    <!-- Laboratory Rules & Latest News -->
-    <section class="news-section">
-      <div class="news-table">
-        <!-- Left Column: Lab Rules -->
-        <div class="news-column">
-          <div class="news-column-header">
-            <h2>Group Life</h2>
-            <a href="./life.html" class="news-more">More </a>
+    <!-- Principal Investigator -->
+    <section class="section">
+      <div class="container">
+        <div class="profile-card reveal">
+          <img class="profile-photo" src="./statics/picture/lqh.jpg" alt="Portrait of Dr. Liangqian Huang">
+          <div class="profile-body">
+            <div class="eyebrow">Principal Investigator</div>
+            <h1 class="profile-name">Liangqian Huang, Ph.D.</h1>
+            <div class="profile-role">Professor · Lab Director</div>
+            <p class="profile-bio">Dr. Huang leads the PQC (Protein Quality Control) Lab, with a research focus on the role and molecular mechanisms of the protein quality control system in cellular homeostasis. The protein quality control system is an essential cellular machinery that assists in the proper folding of proteins and maintains their correct three-dimensional conformation to ensure biological activity. Dysfunction of this system often leads to protein misfolding, which is closely associated with a range of human diseases, including Alzheimer's disease and other neurodegenerative disorders, diabetes, and cancer.</p>
+            <a class="btn btn-outline" href="https://imb.nju.edu.cn/rcdw/zzpxl/20220402/i220299.html" target="_blank" rel="noopener">Full Profile →</a>
           </div>
-          <ul class="news-col">
-            <li>Mar 15, 2026 – 2026 Spring Outing</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-          </ul>
-        </div>
-        
-        <!-- Right Column: Latest News -->
-        <div class="news-column">
-          <div class="news-column-header">
-            <h2>Latest News</h2>
-            <a href="./news.html" class="news-more">More </a>
-          </div>
-          <ul class="news-col">
-            <li>Jun 22, 2026 – Huge congratulations to Yanfei Chen & Yun Liu on graduating!</li>
-            <li>Apr 20, 2026 – Laboratory Safety Training</li>
-            <li>Apr 10, 2026 – Lab Website released</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Friend Links -->
-    <div class="friend-links">
-      <span class="friend-title">Links:</span>
-      <a href="https://www.nju.edu.cn/" target="_blank">Nanjing University</a>
-      <a href="https://imb.nju.edu.cn/index.html" target="_blank">Institute of Modern Biology</a>
-      <a href="https://imb.nju.edu.cn/rcdw/zzpxl/20220402/i220299.html" target="_blank">PI introduction</a>
-      <a href="https://www.sertool.net" target="_blank">SERtool</a>
-    </div>
-  </div>
+    <!-- Group life & latest news -->
+    <section class="section section-soft">
+      <div class="container">
+        <div class="home-grid">
+          <div class="panel reveal">
+            <div class="panel-head">
+              <h2 class="panel-title">Group Life</h2>
+              <a class="panel-link" href="./life.html">More →</a>
+            </div>
+            <ul class="panel-list" id="homeLifeList"></ul>
+          </div>
+          <div class="panel reveal">
+            <div class="panel-head">
+              <h2 class="panel-title">Latest News</h2>
+              <a class="panel-link" href="./news.html">More →</a>
+            </div>
+            <ul class="panel-list" id="homeNewsList"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <footer>
+    <!-- Friendly links -->
+    <div class="link-strip">
+      <div class="container link-strip-inner">
+        <span class="link-strip-label">Links:</span>
+        <a href="https://www.nju.edu.cn/" target="_blank" rel="noopener">Nanjing University</a>
+        <a href="https://imb.nju.edu.cn/index.html" target="_blank" rel="noopener">Institute of Modern Biology</a>
+        <a href="https://imb.nju.edu.cn/rcdw/zzpxl/20220402/i220299.html" target="_blank" rel="noopener">PI Introduction</a>
+        <a href="https://www.sertool.net" target="_blank" rel="noopener">SERtool</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
     <div class="container">
-      &copy; 2026 PQC-Huanglab. All rights reserved.
+      <p class="footer-line1">
+        <img class="footer-logo" src="./statics/picture/logo.png" alt="">
+        <strong class="footer-name">PQC-Huanglab</strong>
+        <span class="footer-sep">&middot;</span>
+        <span>Institute of Modern Biology, Nanjing University</span>
+        <span class="footer-sep">&middot;</span>
+        <a href="mailto:lqhuang@nju.edu.cn">lqhuang@nju.edu.cn</a>
+      </p>
+      <div class="footer-line2">
+        <span>&copy; <span id="footer-year">2026</span> PQC-Huanglab. All rights reserved.</span>
+        <span class="visit-stats" id="visitStats" hidden>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Visits <strong id="busuanzi_value_site_pv">&#8211;</strong>
+          <span class="visit-sep">&middot;</span>
+          Visitors <strong id="busuanzi_value_site_uv">&#8211;</strong>
+        </span>
+      </div>
     </div>
   </footer>
 
-  <!-- Slider Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const wrapper = document.getElementById('sliderWrapper');
-      const prevBtn = document.querySelector('.slider-btn.prev');
-      const nextBtn = document.querySelector('.slider-btn.next');
-      const totalReal = 3;
-      let currentIndex = 1;
-      let intervalId;
+  <button id="backToTop" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
 
-      wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-      function goToSlide(index) {
-        currentIndex = index;
-        wrapper.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-      }
-
-      function nextSlide() {
-        if (currentIndex >= totalReal + 1) {
-          wrapper.style.transition = 'none';
-          currentIndex = 1;
-          wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-          setTimeout(() => {
-            wrapper.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-          }, 50);
-        } else {
-          goToSlide(currentIndex + 1);
-        }
-      }
-
-      function prevSlide() {
-        if (currentIndex <= 1) {
-          wrapper.style.transition = 'none';
-          currentIndex = totalReal + 1;
-          wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-          setTimeout(() => {
-            wrapper.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-          }, 50);
-        } else {
-          goToSlide(currentIndex - 1);
-        }
-      }
-
-      function startAutoPlay() {
-        intervalId = setInterval(nextSlide, 6000);
-      }
-
-      function stopAutoPlay() {
-        clearInterval(intervalId);
-      }
-
-      nextBtn.addEventListener('click', () => {
-        stopAutoPlay();
-        nextSlide();
-        setTimeout(startAutoPlay, 6000);
-      });
-
-      prevBtn.addEventListener('click', () => {
-        stopAutoPlay();
-        prevSlide();
-        setTimeout(startAutoPlay, 6000);
-      });
-
-      const sliderContainer = document.querySelector('.hero-slider');
-      sliderContainer.addEventListener('mouseenter', stopAutoPlay);
-      sliderContainer.addEventListener('mouseleave', startAutoPlay);
-
-      startAutoPlay();
-
-      // Hamburger menu toggle
-      const hamburger = document.getElementById('hamburger');
-      const navMenu = document.getElementById('navMenu');
-
-      hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('show');
-        const spans = hamburger.querySelectorAll('span');
-        if (navMenu.classList.contains('show')) {
-          spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
-          spans[1].style.opacity = '0';
-          spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
-        } else {
-          spans[0].style.transform = 'rotate(0) translate(0, 0)';
-          spans[1].style.opacity = '1';
-          spans[2].style.transform = 'rotate(0) translate(0, 0)';
-        }
-      });
-    });
-  </script>
+  <script src="./assets/js/site-data.js"></script>
+  <script src="./assets/js/main.js" defer></script>
 </body>
 </html>
