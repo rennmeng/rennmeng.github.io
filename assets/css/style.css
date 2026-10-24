@@ -627,6 +627,58 @@ body.nav-open .hamburger span:nth-child(3) {
   font-size: 14px;
 }
 
+/* Research directions overview */
+.research-overview {
+  max-width: 900px;
+  margin: 0 auto 34px;
+  background: linear-gradient(135deg, #faf8fc, var(--primary-050));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 30px 36px;
+  color: var(--body-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.overview-title {
+  color: var(--ink);
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.overview-lead {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.overview-list {
+  list-style: none;
+}
+
+.overview-list li {
+  position: relative;
+  padding: 11px 0 11px 28px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  border-bottom: 1px dashed var(--line);
+}
+
+.overview-list li:last-child {
+  border-bottom: none;
+}
+
+.overview-list li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 20px;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
 /* ==========================================================================
    Research page
    ========================================================================== */
