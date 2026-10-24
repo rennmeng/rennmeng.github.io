@@ -452,6 +452,24 @@
     document.title = (item.title || 'News') + ' · PQC-Huanglab';
   }
 
+  /* ---------- Contact page map tabs (Baidu / Google) ---------- */
+  function initMapTabs() {
+    var tabs = document.querySelectorAll('.map-tab');
+    var frame = document.getElementById('contactMap');
+    if (!tabs.length || !frame) return;
+
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener('click', function () {
+        if (this.classList.contains('is-active')) return;
+        for (var j = 0; j < tabs.length; j++) {
+          tabs[j].classList.remove('is-active');
+        }
+        this.classList.add('is-active');
+        frame.src = this.getAttribute('data-map-src');
+      });
+    }
+  }
+
   /* ---------- Boot ---------- */
   ready(function () {
     renderContent();
@@ -462,6 +480,7 @@
     initReveal();
     initBackToTop();
     initFooter();
+    initMapTabs();
     loadAnalytics();
     loadVisitCounter();
   });
