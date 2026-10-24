@@ -470,58 +470,6 @@
     }
   }
 
-  /* ---------- Lab system reachability check (homepage) ---------- */
-  function initLabSystemCheck() {
-    var hint = document.getElementById('labSystemHint');
-    var status = document.getElementById('labSystemStatus');
-    if (!hint && !status) return;
-
-    function markOnline() {
-      if (status) {
-        status.textContent = 'Online';
-        status.classList.add('is-online');
-      }
-    }
-
-    function markOffline() {
-      if (status) {
-        status.textContent = 'Offline';
-        status.classList.add('is-offline');
-      }
-      if (hint) hint.hidden = false;
-    }
-
-    // Very old browsers: cannot probe, stay neutral instead of warning.
-    if (typeof fetch !== 'function' || typeof AbortController === 'undefined') {
-      if (status) status.textContent = '';
-      return;
-    }
-
-    var controller = new AbortController();
-    var finished = false;
-    var timer = setTimeout(function () {
-      if (finished) return;
-      finished = true;
-      controller.abort();
-      markOffline();
-    }, 5000);
-
-    // no-cors: any response (even opaque / 404) means the host is reachable.
-    fetch('http://180.209.3.142:4100/favicon.ico', { mode: 'no-cors', signal: controller.signal })
-      .then(function () {
-        if (finished) return;
-        finished = true;
-        clearTimeout(timer);
-        markOnline();
-      })
-      .catch(function () {
-        if (finished) return;
-        finished = true;
-        clearTimeout(timer);
-        markOffline();
-      });
-  }
-
   /* ---------- Boot ---------- */
   ready(function () {
     renderContent();
@@ -533,7 +481,6 @@
     initBackToTop();
     initFooter();
     initMapTabs();
-    initLabSystemCheck();
     loadAnalytics();
     loadVisitCounter();
   });
