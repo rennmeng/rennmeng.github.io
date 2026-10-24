@@ -636,10 +636,13 @@ body.nav-open .hamburger span:nth-child(3) {
   gap: 14px 32px;
 }
 
-.lab-system-block {
+.lab-system-block,
+.developed-block {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+  border-radius: 12px;
 }
 
 .lab-system-icon {
@@ -652,6 +655,7 @@ body.nav-open .hamburger span:nth-child(3) {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: box-shadow 0.25s ease;
 }
 
 .lab-system-stack {
@@ -672,11 +676,16 @@ body.nav-open .hamburger span:nth-child(3) {
   font-size: 16.5px;
   font-weight: 700;
   color: var(--ink);
-  text-decoration: none;
 }
 
-.lab-system-link:hover {
+.lab-system-block:hover .lab-system-link,
+.developed-block:hover .lab-system-link {
   color: var(--primary);
+}
+
+.lab-system-block:hover .lab-system-icon,
+.developed-block:hover .lab-system-icon {
+  box-shadow: 0 6px 16px rgba(91, 44, 131, 0.3);
 }
 
 .lab-system-cn {
@@ -826,6 +835,35 @@ body.nav-open .hamburger span:nth-child(3) {
   font-weight: 700;
   color: var(--ink);
   margin-right: 4px;
+}
+
+/* Tool detail page */
+.feature-list {
+  list-style: none;
+  margin: 16px 0 22px;
+}
+
+.feature-list li {
+  position: relative;
+  padding: 7px 0 7px 26px;
+  font-size: 15px;
+}
+
+.feature-list li::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 15px;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+.tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 /* ==========================================================================
