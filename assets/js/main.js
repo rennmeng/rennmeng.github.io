@@ -470,6 +470,50 @@
     }
   }
 
+  /* ---------- Lightbox (click a compressed image to view the original) ---------- */
+  function initLightbox() {
+    var overlay = null;
+    var overlayImg = null;
+
+    function closeLightbox() {
+      if (!overlay) return;
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function ensureOverlay() {
+      if (overlay) return;
+      overlay = document.createElement('div');
+      overlay.className = 'lightbox';
+      overlayImg = document.createElement('img');
+      overlayImg.alt = '';
+      var close = document.createElement('button');
+      close.type = 'button';
+      close.className = 'lightbox-close';
+      close.setAttribute('aria-label', 'Close image preview');
+      close.innerHTML = '&times;';
+      overlay.appendChild(overlayImg);
+      overlay.appendChild(close);
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    }
+
+    // Any <img data-full="..."> opens the lightbox with the original file.
+    document.addEventListener('click', function (e) {
+      var img = e.target.closest ? e.target.closest('img[data-full]') : null;
+      if (!img) return;
+      e.preventDefault();
+      ensureOverlay();
+      overlayImg.src = img.getAttribute('data-full');
+      overlayImg.alt = img.alt || '';
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
   /* ---------- Boot ---------- */
   ready(function () {
     renderContent();
@@ -481,6 +525,7 @@
     initBackToTop();
     initFooter();
     initMapTabs();
+    initLightbox();
     loadAnalytics();
     loadVisitCounter();
   });
