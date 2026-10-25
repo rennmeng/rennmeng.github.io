@@ -164,20 +164,33 @@
     }
   }
 
-  /* ---------- Back-to-top button ---------- */
+  /* ---------- Floating buttons: back to top / go to bottom ---------- */
   function initBackToTop() {
-    var button = document.getElementById('backToTop');
-    if (!button) return;
+    var up = document.getElementById('backToTop');
+    var down = document.getElementById('goToBottom');
+    if (!up && !down) return;
+
+    function nearBottom() {
+      return window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
+    }
 
     function toggle() {
-      button.classList.toggle('show', window.scrollY > 400);
+      if (up) up.classList.toggle('show', window.scrollY > 400);
+      if (down) down.classList.toggle('show', !nearBottom());
     }
     window.addEventListener('scroll', toggle, { passive: true });
     toggle();
 
-    button.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (up) {
+      up.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+    if (down) {
+      down.addEventListener('click', function () {
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+      });
+    }
   }
 
   /* ---------- Footer year ---------- */
@@ -205,33 +218,56 @@
   }
 
   /* ---------- Public visit counter (busuanzi, shown in the footer) ----------
-     The busuanzi service can be slow, so its script is only requested
-     AFTER the page has fully loaded — a hanging request can never hold
-     up the browser's page-load spinner. */
+     The busuanzi service can be slow or hang, so its script is only
+     requested AFTER the page has fully loaded, with one silent retry.
+     If numbers never arrive the counter simply stays hidden. */
   function loadVisitCounter() {
     var slot = document.getElementById('visitStats');
     if (!slot || !SITE.visitCounter) return;
 
-    function inject() {
-      var script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-      script.onerror = function () { slot.hidden = true; };
-      document.head.appendChild(script);
+    var injected = null;
+    var attempts = 0;
+    var MAX_ATTEMPTS = 2;
 
-      // The counter stays hidden until real numbers arrive; if the service
-      // is unreachable the footer simply shows no counter.
-      var tries = 0;
-      (function check() {
-        var pv = document.getElementById('busuanzi_value_site_pv');
-        if (pv && /\d/.test(pv.textContent)) {
-          slot.hidden = false;
-          return;
-        }
-        if (++tries < 60) {
-          setTimeout(check, 250);
-        }
-      })();
+    function hasNumbers() {
+      var pv = document.getElementById('busuanzi_value_site_pv');
+      return !!(pv && /\d/.test(pv.textContent));
+    }
+
+    function stop() {
+      if (injected && injected.parentNode) injected.parentNode.removeChild(injected);
+    }
+
+    function finish() {
+      stop();
+      slot.hidden = !hasNumbers();
+    }
+
+    function poll(checksLeft) {
+      if (hasNumbers()) {
+        stop();
+        slot.hidden = false;
+        return;
+      }
+      if (checksLeft <= 0) {
+        if (attempts < MAX_ATTEMPTS) inject(); else finish();
+        return;
+      }
+      setTimeout(function () { poll(checksLeft - 1); }, 500);
+    }
+
+    function inject() {
+      attempts += 1;
+      stop();
+      injected = document.createElement('script');
+      injected.async = true;
+      injected.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+        + (attempts > 1 ? '?retry=' + Date.now() : '');
+      injected.onerror = function () {
+        if (attempts < MAX_ATTEMPTS) inject(); else finish();
+      };
+      document.head.appendChild(injected);
+      poll(24); // 24 × 500 ms = 12 s per attempt
     }
 
     if (document.readyState === 'complete') {

@@ -1545,10 +1545,17 @@ body.nav-open .hamburger span:nth-child(3) {
 /* ==========================================================================
    Back to top
    ========================================================================== */
-#backToTop {
+.float-buttons {
   position: fixed;
   right: 22px;
   bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 90;
+}
+
+.float-buttons button {
   width: 44px;
   height: 44px;
   border: none;
@@ -1564,16 +1571,15 @@ body.nav-open .hamburger span:nth-child(3) {
   visibility: hidden;
   transform: translateY(8px);
   transition: all 0.3s ease;
-  z-index: 90;
 }
 
-#backToTop.show {
+.float-buttons button.show {
   opacity: 1;
   visibility: visible;
   transform: none;
 }
 
-#backToTop:hover {
+.float-buttons button:hover {
   background: var(--primary-dark);
 }
 
