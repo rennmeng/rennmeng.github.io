@@ -204,30 +204,41 @@
     gtag('config', SITE.gaMeasurementId);
   }
 
-  /* ---------- Public visit counter (busuanzi, shown in the footer) ---------- */
+  /* ---------- Public visit counter (busuanzi, shown in the footer) ----------
+     The busuanzi service can be slow, so its script is only requested
+     AFTER the page has fully loaded — a hanging request can never hold
+     up the browser's page-load spinner. */
   function loadVisitCounter() {
     var slot = document.getElementById('visitStats');
     if (!slot || !SITE.visitCounter) return;
 
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-    script.onerror = function () { slot.hidden = true; };
-    document.head.appendChild(script);
+    function inject() {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+      script.onerror = function () { slot.hidden = true; };
+      document.head.appendChild(script);
 
-    // The counter stays hidden until real numbers arrive; if the service
-    // is unreachable the footer simply shows no counter.
-    var tries = 0;
-    (function check() {
-      var pv = document.getElementById('busuanzi_value_site_pv');
-      if (pv && pv.textContent.replace(/\s/g, '') !== '') {
-        slot.hidden = false;
-        return;
-      }
-      if (++tries < 40) {
-        setTimeout(check, 250);
-      }
-    })();
+      // The counter stays hidden until real numbers arrive; if the service
+      // is unreachable the footer simply shows no counter.
+      var tries = 0;
+      (function check() {
+        var pv = document.getElementById('busuanzi_value_site_pv');
+        if (pv && /\d/.test(pv.textContent)) {
+          slot.hidden = false;
+          return;
+        }
+        if (++tries < 60) {
+          setTimeout(check, 250);
+        }
+      })();
+    }
+
+    if (document.readyState === 'complete') {
+      inject();
+    } else {
+      window.addEventListener('load', inject);
+    }
   }
 
   /* ---------- Content lists (rendered from assets/js/site-data.js) ---------- */
