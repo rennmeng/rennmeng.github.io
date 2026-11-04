@@ -1522,10 +1522,27 @@ body.nav-open .hamburger span:nth-child(3) {
   color: #8f86a6;
 }
 
+/* Mobile: keep copyright + visit counter on a single line by
+   hiding the "All rights reserved." tail and tightening the gap. */
+@media (max-width: 640px) {
+  .footer-long {
+    display: none;
+  }
+
+  .footer-line2 {
+    gap: 4px 10px;
+    font-size: 11px;
+  }
+}
+
 .visit-stats {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
+}
+
+.visit-stats strong {
+  font-variant-numeric: tabular-nums;
 }
 
 .visit-stats[hidden] {
@@ -1539,7 +1556,6 @@ body.nav-open .hamburger span:nth-child(3) {
 
 .visit-sep {
   opacity: 0.5;
-  margin: 0 2px;
 }
 
 /* ==========================================================================
@@ -1581,6 +1597,24 @@ body.nav-open .hamburger span:nth-child(3) {
 
 .float-buttons button:hover {
   background: var(--primary-dark);
+}
+
+@media (max-width: 640px) {
+  .float-buttons {
+    right: 14px;
+    bottom: 14px;
+    gap: 8px;
+  }
+
+  .float-buttons button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .float-buttons button svg {
+    width: 15px;
+    height: 15px;
+  }
 }
 
 /* ==========================================================================
