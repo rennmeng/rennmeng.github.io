@@ -8,7 +8,9 @@
    3. title 标题必填；text 是列表页显示的一句话简介，可留空 ""；
    4. body 是详情页正文：一个数组，每个字符串是一段（点击首页/News 页
       的条目会进入 detail.html 详情页显示这些内容）；
-   5. image 可选：详情页顶部大图，填照片路径如 "./statics/picture/xxx.jpg"；
+   5. image 可选：详情页顶部大图，填压缩版路径如 "./statics/picture/small/xxx.webp"；
+      （新图片放入 statics/picture/ 后先运行 python compress_images.py 生成压缩版）；
+   6. images 可选：详情页的更多照片（数组），如 ["./statics/picture/small/a.webp"]；
    6. link 可选：相关链接（论文、新闻稿、更多照片等），留空 "" 则不显示按钮；
    7. id 可选：自定义详情页链接编号（如 "outing2026"），
       不填会自动生成（news-日期-序号）。
@@ -29,6 +31,19 @@ var SITE_DATA = {
 
   /* —— 实验室动态（首页 Latest News + News 页 + 详情页）—— */
   news: [
+    {
+      date: "2026-11-11",
+      title: "Congratulations to Ren Kang on passing the doctoral degree application defense",
+      text: "Ren Kang successfully passed the defense for his doctoral degree application.",
+      body: [
+        "Ren Kang has successfully passed the defense for his doctoral degree application.",
+        "The lab congratulates him on this important milestone and wishes him every success in the final stage of his PhD research."
+      ],
+      image: "./statics/picture/small/RKdoc.webp",
+      images: ["./statics/picture/small/xjc.webp"],
+      link: "",
+      id: ""
+    },
     {
       date: "2026-08-21",
       title: "Our YTHDC1 study is published in Nature Communications",
@@ -82,6 +97,18 @@ var SITE_DATA = {
 
   /* —— 小组生活（首页 Group Life + Group Life 页 + 详情页）—— */
   life: [
+    {
+      date: "2026-10-30",
+      title: "Hiking Together",
+      text: "The lab went hiking together.",
+      body: [
+        "The lab went on a hike together — a relaxing day outdoors with the whole group.",
+        "More group activities coming soon."
+      ],
+      image: "./statics/picture/small/2026w.webp",
+      link: "",
+      id: ""
+    },
     {
       date: "2026-03-15",
       title: "2026 Spring Outing",

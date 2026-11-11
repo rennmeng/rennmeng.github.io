@@ -473,6 +473,16 @@
         p.textContent = text;
         body.appendChild(p);
       });
+      if (item.images && item.images.length) {
+        item.images.forEach(function (src) {
+          var img = document.createElement('img');
+          img.className = 'detail-cover';
+          img.src = src;
+          img.alt = item.title || '';
+          img.loading = 'lazy';
+          body.appendChild(img);
+        });
+      }
       if (item.link && !isExternal(item.link)) {
         var file = document.createElement('p');
         var a = document.createElement('a');
