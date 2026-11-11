@@ -36,8 +36,7 @@ var SITE_DATA = {
       title: "Congratulations to Ren Kang on passing the doctoral degree application defense",
       text: "Ren Kang successfully passed the defense for his doctoral degree application.",
       body: [
-        "Ren Kang has successfully passed the defense for his doctoral degree application.",
-        "The lab congratulates him on this important milestone and wishes him every success in the final stage of his PhD research."
+        "Ren Kang has successfully passed the defense for his doctoral degree application."
       ],
       image: "./statics/picture/small/RKdoc.webp",
       images: ["./statics/picture/small/xjc.webp"],

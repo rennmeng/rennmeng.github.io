@@ -74,6 +74,7 @@
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var current = 0;
     var timer = null;
+    var hovering = false;
 
     // Build one dot per slide
     for (var i = 0; i < slides.length; i++) {
@@ -83,7 +84,7 @@
         dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
         dot.addEventListener('click', function () {
           goTo(index);
-          restart();
+          start();
         });
         dotsWrap.appendChild(dot);
       })(i);
@@ -99,8 +100,11 @@
       dots[current].classList.add('is-active');
     }
 
+    // Clear any previous timer before starting a new one so clicks can never
+    // stack intervals, and never autoplay while the pointer is on the slider.
     function start() {
-      if (!reduced) {
+      stop();
+      if (!reduced && !hovering) {
         timer = setInterval(function () { goTo(current + 1); }, 6000);
       }
     }
@@ -112,26 +116,44 @@
       }
     }
 
-    function restart() {
-      stop();
-      start();
-    }
-
     if (prevBtn) {
       prevBtn.addEventListener('click', function () {
         goTo(current - 1);
-        restart();
+        start();
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener('click', function () {
         goTo(current + 1);
-        restart();
+        start();
       });
     }
 
-    slider.addEventListener('mouseenter', stop);
-    slider.addEventListener('mouseleave', start);
+    slider.addEventListener('mouseenter', function () {
+      hovering = true;
+      stop();
+    });
+    slider.addEventListener('mouseleave', function () {
+      hovering = false;
+      start();
+    });
+
+    // Stop while the tab is hidden; throttled timers would pile up switches.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stop();
+      } else {
+        start();
+      }
+    });
+
+    // The markup pre-activates the first slide, so its computed style is
+    // already zoomed and the transform transition would never play on load.
+    // Commit the unzoomed state with a reflow, then release it to zoom.
+    var firstImg = slides[0].querySelector('img');
+    firstImg.style.transform = 'scale(1)';
+    void slider.offsetWidth;
+    firstImg.style.transform = '';
 
     goTo(0);
     start();

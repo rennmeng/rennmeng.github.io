@@ -389,15 +389,15 @@ body.nav-open .hamburger span:nth-child(3) {
   height: 100%;
   object-fit: cover;
   display: block;
+  /* Slow zoom on the active slide. A transition (not an animation) keeps the
+     outgoing slide at its current scale while it fades out instead of
+     snapping back to scale(1). */
+  transform: scale(1);
+  transition: transform 8s ease-out;
 }
 
 .hero-slide.is-active img {
-  animation: kenburns 8s ease-out forwards;
-}
-
-@keyframes kenburns {
-  from { transform: scale(1); }
-  to   { transform: scale(1.07); }
+  transform: scale(1.07);
 }
 
 .hero-arrow {
@@ -1827,8 +1827,12 @@ img[data-full] {
     transition: none;
   }
 
+  .hero-slide img {
+    transition: none;
+  }
+
   .hero-slide.is-active img {
-    animation: none;
+    transform: scale(1);
   }
 
   .reveal {
